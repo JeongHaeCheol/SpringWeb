@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import my.custom.project.model.User;
 
+
 @Repository
 @Transactional
 public class UserDao {
