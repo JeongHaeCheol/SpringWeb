@@ -33,11 +33,13 @@ public class User {
 	@NotEmpty(message="The User password must not be null")
 	private String password;
 	
-	@NotEmpty(message="The User email must not be null")
-	private String email;
+/*	@NotEmpty(message="The User email must not be null")
+	private String email;*/
 	
 	
 	private boolean enabled=false;
 	
 	private String authority;
+	
+	
 }

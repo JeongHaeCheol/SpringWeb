@@ -27,7 +27,9 @@ public class UserDao {
 	
 	public void addUser(User user){
 		Session session = sessionFactory.getCurrentSession();
+		System.out.println(user.getPassword());
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		System.out.println(user.getPassword());
 		session.saveOrUpdate(user);
 		session.flush();
 		

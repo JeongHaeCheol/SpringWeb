@@ -21,13 +21,13 @@
 		<form action="<c:url value="/login"/>" method="post">
 			<div class="form-group">
 				<label for="username">Username:</label> <input type="text"
-					class="form-control" id="uesrname" placeholder="Enter username"
+					class="form-control" id="username" placeholder="Enter username"
 					name="username" style="width: 50%">
 			</div>
 
 			<div class="form-group">
 				<label for="pwd">Password:</label> <input type="password"
-					class="form-control" id="pwd" placeholder="Enter password"
+					class="form-control" id="password" placeholder="Enter password"
 					name="password" style="width: 50%">
 			</div>
 
@@ -37,6 +37,8 @@
 
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
+		
+			<a href="<c:url value="/register"/>" class="btn btn-default">회원가입</a>
 	</div>
 </div>
 </main>
