@@ -36,9 +36,10 @@
 
 
 			<button type="submit" class="btn btn-primary">Submit</button>
+			<a href="<c:url value="/register"/>" class="btn btn-primary">회원가입</a>
 		</form>
-		
-			<a href="<c:url value="/register"/>" class="btn btn-default">회원가입</a>
+			
+
 	</div>
 </div>
 </main>

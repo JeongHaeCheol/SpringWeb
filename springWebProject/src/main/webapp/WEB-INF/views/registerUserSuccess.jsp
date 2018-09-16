@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<main role="main" style="margin-top:30px;"
+<main role="main" 
 	class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 <div class="container-wrapper">
 	<div class="container">

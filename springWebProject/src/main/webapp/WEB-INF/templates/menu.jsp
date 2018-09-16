@@ -3,14 +3,14 @@
 	pageEncoding="UTF-8"%>
 	
 	
-<nav class="col-md-2 d-none d-md-block bg-light sidebar" >
+<nav id="menuId" class="col-md-2 d-none d-md-block bg-light sidebar">
 	<div class="sidebar-sticky" >
 		<ul class="nav flex-column">
 			<li class="nav-item"><a class="nav-link active" href="#"> <span
-					data-feather="home"></span> Dashboard <span class="sr-only">(current)</span>
+					data-feather="home"></span> 대쉬보드 <span class="sr-only">(current)</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="#"> <span
-					data-feather="file"></span> Orders
+					data-feather="file"></span> 게시판
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="#"> <span
 					data-feather="shopping-cart"></span> Products

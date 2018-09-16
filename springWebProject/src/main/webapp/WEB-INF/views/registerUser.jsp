@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<main role="main" style="margin-top:30px;"
+<main role="main"
 	class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 <div class="container-wrapper">
 	<div class="container">
@@ -49,9 +49,9 @@
 				<sf:input path="shippingAddress.zipCode" id="shippingZip" class="form-control"/>
 			</div> --%>
 
-			<input type="submit" value="submit" class="btn btn-default">
+			<input type="submit" value="submit" class="btn btn-primary">
 
-			<a href="<c:url value="/"/>" class="btn btn-default">Cancel</a>
+			<a href="<c:url value="/"/>" class="btn btn-primary">Cancel</a>
 		</sf:form>
 
 	</div>
