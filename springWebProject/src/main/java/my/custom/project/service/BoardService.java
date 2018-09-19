@@ -5,8 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.stereotype.Service;
+
 import my.custom.project.model.Board;
 
+
+@Service
 public class BoardService {
 
 	public List<Board> listAll() {

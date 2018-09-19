@@ -28,5 +28,21 @@
 	<definition name="registerUserSuccess" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/registerUserSuccess.jsp" />
 	</definition>
+	
+	<definition name="board/list" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/board/list.jsp" />
+	</definition>
+
+	<definition name="board/update" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/board/update.jsp" />
+	</definition>
+
+	<definition name="board/view" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/board/view.jsp" />
+	</definition>
+
+	<definition name="board/write" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/board/write.jsp" />
+	</definition>
 
 </tiles-definitions>
