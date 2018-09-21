@@ -1,5 +1,7 @@
 package my.custom.project.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,5 +24,10 @@ public class Board {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column
 	private int bno;
+	private String title;
+	private String content;
+	private String writer;
+	private Date regdate;
+	private int viewcnt;
 
 }

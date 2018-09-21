@@ -1,17 +1,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	
+
+
 <nav id="menuId" class="col-md-2 d-none d-md-block bg-light sidebar">
-	<div class="sidebar-sticky" >
+	<div class="sidebar-sticky">
 		<ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link active" href="#"> <span
-					data-feather="home"></span> 대쉬보드 <span class="sr-only">(current)</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link" href="#"> <span
-					data-feather="file"></span> 게시판
-			</a></li>
+				<li class="nav-item"><a class="nav-link" href="<c:url value="/"/>"> <span
+					data-feather="home">
+					</span>HOME</a> 
+			</li>
+			<li class="nav-item"><a class="nav-link" href="<c:url value="/board/list"/>"> <span
+					data-feather="file">
+					</span>게시판</a> 
+			</li>
 			<li class="nav-item"><a class="nav-link" href="#"> <span
 					data-feather="shopping-cart"></span> Products
 			</a></li>

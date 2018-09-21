@@ -40,7 +40,9 @@ public class BoardController {
 
 	// 2. 게시글 작성
 	@RequestMapping(value = "write", method = RequestMethod.GET)
-	public String write() {
+	public String write(Model model) {
+		Board board = new Board();
+		model.addAttribute("board",board);
 		return "board/write"; // board 폴더 밑의 write.jsp
 	}
 
@@ -75,18 +77,18 @@ public class BoardController {
 			}
 			
 			//jsp 뷰에서 modelAttribute에 설정된 "board"와 이메소드의 매개변수 board가 연결되어 입력값 유지가 가능
-			return new RedirectView("board/update");
+			return new RedirectView("update");
 		}
 
 		boardService.update(board);
 
-		return new RedirectView("board/view");
+		return new RedirectView("view");
 	}
 	
 	//5. 게시글 삭제
 	@RequestMapping("delete")
 	public RedirectView delete(@RequestParam int bno)throws Exception {
 		boardService.delete(bno);
-		return new RedirectView("board/list");
+		return new RedirectView("list");
 	}
 }
