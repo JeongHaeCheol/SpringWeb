@@ -16,7 +16,7 @@
 			<tr>
 				<th>글번호</th>
 				<th>제목</th>
-				<th>이름</th>
+				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
@@ -26,7 +26,7 @@
 					<td>${board.bno}</td>
 					<td><a href="<c:url value="/board/view?bno=${board.bno}"/>">${board.title}</a></td>
 					<td>${board.writer}</td>
-					<td><fmt:formatDate value="${row.regdate}"
+					<td><fmt:formatDate value="${board.regdate}"
 							pattern="yyyy-MM-dd HH:mm:ss" /></td>
 					<td>${board.viewcnt}</td>
 				</tr>

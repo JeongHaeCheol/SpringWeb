@@ -1,5 +1,6 @@
 package my.custom.project.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,9 +26,16 @@ public class Board {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column
 	private int bno;
+	
+	@NotEmpty(message="The User name must not be null")
 	private String title;
+	
+	@NotEmpty(message="The User name must not be null")
 	private String content;
+	
+	@NotEmpty(message="The User name must not be null")
 	private String writer;
+	
 	private Date regdate;
 	private int viewcnt;
 

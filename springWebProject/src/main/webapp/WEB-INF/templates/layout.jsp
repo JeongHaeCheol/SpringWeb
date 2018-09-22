@@ -33,8 +33,8 @@
 <body id="containerId">
 	<div class="container-fluid">
 		<div class="row">
-	
-			
+
+
 			<tiles:insertAttribute name="body" />
 
 		</div>
@@ -57,19 +57,29 @@
 	<script>
 		feather.replace()
 
-		const header = document.getElementById("headerId");
-		if (header.style.position !== "fixed") {
-			header.style.position = "fixed";
+		function relatedPos() {
+			const header = document.getElementById("headerId");
+
+			if (header.style.position !== "fixed") {
+				header.style.position = "fixed";
+			}
+			const sideBar = document.getElementById("menuId");
+
+			const sideBarWidth = sideBar.clientWidth;
+			console.log("width" + sideBarWidth);
+			const headerHeight = header.clientHeight;
+
+			document.getElementById("containerId").style.marginTop = headerHeight
+					+ "px";
+			document.getElementById("menuId").style.marginTop = headerHeight
+					+ "px";
 		}
-		const sideBar = document.getElementById("menuId");
-
-		const sideBarWidth = sideBar.clientWidth;
-		console.log("width" + sideBarWidth);
-		const headerHeight = header.clientHeight;
-
-		document.getElementById("containerId").style.marginTop = headerHeight
-				+ "px";
-		document.getElementById("menuId").style.marginTop = headerHeight + "px";
+		relatedPos();
+		
+		
+		$(window).resize(function() {
+			relatedPos();
+		});
 	</script>
 
 
