@@ -9,16 +9,20 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import my.custom.project.model.Board;
+
 import my.custom.project.service.BoardService;
 
 @Controller
@@ -40,8 +44,10 @@ public class BoardController {
 
 	// 2. 게시글 작성
 	@RequestMapping(value = "write", method = RequestMethod.GET)
-	public String write(Model model) {
-		Board board = new Board();
+	public String write(Model model, Board board) {
+		if(board == null) {
+		board = new Board();
+		}
 		model.addAttribute("board",board);
 		return "board/write"; // board 폴더 밑의 write.jsp
 	}
@@ -49,6 +55,10 @@ public class BoardController {
 	// 2.2 게시글 처리
 	@RequestMapping(value = "insert", method = RequestMethod.POST)
 	public RedirectView insert(Board board) throws Exception {
+		
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String name = user.getUsername();
+		board.setWriter(name);
 		boardService.create(board);
 		return new RedirectView("list"); // return "redirect:list";
 		// redirect를 걸어야 컨트롤러를 거치기 때문에 컨트롤러의 수행작업을 다시 수행할 수 있다.

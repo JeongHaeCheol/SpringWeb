@@ -21,7 +21,7 @@
 	rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="<c:url value="/resources/css/mycustom.css"/>"
+<link href="<c:url value="/resources/css/mycustom.css?ver=1"/>"
 	rel="stylesheet">
 
 

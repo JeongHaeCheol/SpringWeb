@@ -14,23 +14,16 @@
 			method="post" modelAttribute="board" >
 			<div class="form-group">
 				<label for="title">제목</label>
-				<sf:input path="title" id="title" class="form-control" />
+				<sf:input path="title" id="title" style="width:60%;" class="form-control" />
 				<sf:errors path="title" cssStyle="color:#ff0000;" />
 			</div>
 
-			<div class="form-group">
+			<div class="form-group" >
 				<label for="content">내용</label>
-				<sf:input path="content" id="content" class="form-control" />
+				<sf:textarea path="content" id="content" cols="40" row="60" style="width:60%; height:260px;" class="form-control" />
 				<sf:errors path="content" cssStyle="color:#ff0000;" />
 			</div>
 			
-			<!--추후 writer는 무조건 작성자가 되게 작성칸 제거  -->
-			<div class="form-group">
-				<label for="writer">작성자</label>
-				<sf:input path="writer" id="writer" class="form-control" />
-				<sf:errors path="writer" cssStyle="color:#ff0000;" />
-			</div>
-
 			<input type="submit" value="submit" class="btn btn-primary">
 			<a href="<c:url value="/board/list"/>" class="btn btn-primary">취소</a>
 

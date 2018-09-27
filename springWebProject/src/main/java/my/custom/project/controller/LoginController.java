@@ -25,7 +25,7 @@ public class LoginController {
 	
 	@RequestMapping("/login")
 	public String Login(@RequestParam(value="error", required=false) String error, 
-			@RequestParam(value="logout", required=false) String logout, Model model){
+			@RequestParam(value="logout", required=false) String logout, Model model, User user){
 		
 		if (error!=null){
 			model.addAttribute("errorMsg","Invalid username and password");
@@ -34,15 +34,8 @@ public class LoginController {
 			model.addAttribute("logoutMsg", "You have been logged out successfully");
 		}
 		
-		List<User> userList = userService.getAllUsers();
+		System.out.println(user);
 		
-		
-		for(User userInfo: userList) {
-				logger.info("username : " + userInfo.getUsername());
-
-				logger.info("password : " + userInfo.getPassword());
-		}
-
 		
 		return "login";
 	}
