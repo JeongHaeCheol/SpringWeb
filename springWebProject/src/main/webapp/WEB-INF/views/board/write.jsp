@@ -9,22 +9,26 @@
 	<div class="container">
 		<h1>글쓰기</h1>
 
-		<sf:form
-			action="${pageContext.request.contextPath}/board/insert?${_csrf.parameterName}=${_csrf.token}"
-			method="post" modelAttribute="board" >
+		<sf:form action="${pageContext.request.contextPath}/board/write"
+			method="post" modelAttribute="board">
+
 			<div class="form-group">
 				<label for="title">제목</label>
-				<sf:input path="title" id="title" style="width:60%;" class="form-control" />
 				<sf:errors path="title" cssStyle="color:#ff0000;" />
+				<sf:input path="title" id="title" style="width:60%;"
+					class="form-control" />
+
 			</div>
 
-			<div class="form-group" >
+			<div class="form-group">
 				<label for="content">내용</label>
-				<sf:textarea path="content" id="content" cols="40" row="60" style="width:60%; height:260px;" class="form-control" />
 				<sf:errors path="content" cssStyle="color:#ff0000;" />
+				<sf:textarea path="content" id="content" cols="40" row="60"
+					style="width:60%; height:260px;" class="form-control" />
+
 			</div>
-			
-			<input type="submit" value="submit" class="btn btn-primary">
+
+			<sf:button type="submit" class="btn btn-primary">완료</sf:button>
 			<a href="<c:url value="/board/list"/>" class="btn btn-primary">취소</a>
 
 		</sf:form>

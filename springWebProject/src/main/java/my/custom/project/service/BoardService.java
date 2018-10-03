@@ -23,6 +23,10 @@ public class BoardService {
 	public List<Board> listAll() {
 		return boardDao.listAll();
 	}
+	
+	public Board getArticle(int bno) {
+		return boardDao.getArticle(bno);
+	}
 
 	public void create(Board board) {
 		String title = board.getTitle();

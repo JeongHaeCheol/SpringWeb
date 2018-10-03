@@ -20,6 +20,11 @@ public class BoardDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+	public Board getArticle(int bno) {
+		Session session = sessionFactory.getCurrentSession();
+		Board board = (Board)session.get(Board.class, bno);
+		return board;
+	}
 
 	public void create(Board board) {
 		Session session = sessionFactory.getCurrentSession();
@@ -37,13 +42,20 @@ public class BoardDao {
 
 	public List<Board> listAll() {
 		Session session = sessionFactory.getCurrentSession();
-		List<Board> boardList = session.createQuery("from Board").list();
+		List<Board> boardList = session.createQuery("from Board order by bno DESC").list();
 		return boardList;
 	}
 
 	public void update(Board board) {
 		Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(board);
+		Board originBoard = session.get(Board.class, board.getBno());
+		
+		originBoard.setTitle(board.getTitle());
+		originBoard.setContent(board.getContent());
+		
+		System.out.println("테스트 : " + originBoard);
+
+		session.saveOrUpdate(originBoard);
 		session.flush();
 		
 	}

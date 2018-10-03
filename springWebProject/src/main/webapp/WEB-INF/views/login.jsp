@@ -39,7 +39,7 @@
 				value="${_csrf.token}" />
  --%>
 
-			<sf:button type="submit" class="btn btn-primary">Submit</sf:button>
+			<sf:button type="submit" class="btn btn-primary">로그인</sf:button>
 			<a href="<c:url value="/register"/>" class="btn btn-primary">회원가입</a>
 		</sf:form>
 

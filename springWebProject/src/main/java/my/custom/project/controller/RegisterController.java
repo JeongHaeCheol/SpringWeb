@@ -23,13 +23,8 @@ public class RegisterController {
 	private UserService userService;
 	
 	@RequestMapping("/register")
-	public String registerUser(Model model){
+	public String registerUser(Model model, User user){
 		
-		User user= new User();
-	/*	ShippingAddress shippingAddress = new ShippingAddress();
-		
-		user.setShippingAddress(shippingAddress);*/
-		model.addAttribute("user",user);
 		return "registerUser";
 	}
 	
@@ -37,12 +32,12 @@ public class RegisterController {
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public String registerUserPost(@Valid User user , BindingResult result, Model model){
 		if(result.hasErrors()){
-			return "registerUSer";
+			return "registerUser";
 		}
 		List<User> userList = userService.getAllUsers();
 		
 		for(int i=0; i<userList.size(); i++){
-			if(user.getUsername().equals(userList.get(i).getUsername())){
+			if(user.getUsername().equals(userList.get(i).getUsername()) ){
 				model.addAttribute("usernameMsg" , "username already exist" ); 
 				return "registerUser";
 			}

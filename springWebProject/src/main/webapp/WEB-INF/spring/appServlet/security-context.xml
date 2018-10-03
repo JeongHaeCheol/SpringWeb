@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-		<bean id="customFailureHandler"
+	<bean id="customFailureHandler"
 		class="my.custom.project.handler.CustomAuthenticationFailureHandler" />
 
 
@@ -13,37 +13,41 @@
 
 
 
-			<security:authentication-manager>
-				<security:authentication-provider>
-					<security:jdbc-user-service
-						data-source-ref="dataSource"
-						users-by-username-query="select username, password, enabled from users where username=?"
-						authorities-by-username-query="select username, authority  from users where username=?" />
-					<security:password-encoder ref="bcryptEncoder"></security:password-encoder>
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="select username, password, enabled from users where username=?"
+				authorities-by-username-query="select username, authority  from users where username=?" />
+			<security:password-encoder ref="bcryptEncoder"></security:password-encoder>
 
-				</security:authentication-provider>
+		</security:authentication-provider>
 
-			</security:authentication-manager>
-			<security:http auto-config="true" create-session="always"
-				use-expressions="true">
+	</security:authentication-manager>
+	<security:http auto-config="true" create-session="always"
+		use-expressions="true">
 
-				<security:csrf disabled="true" />
-
-
-				<security:intercept-url pattern="/" access="permitAll" />
-				<security:intercept-url pattern="/home"
-					access="permitAll" />
-				<security:intercept-url pattern="/admin/**"
-					access='hasRole("ROLE_ADMIN")' />
-				<security:intercept-url pattern="/board/write"
-					access='hasRole("ROLE_USER") or hasRole("ROLE_ADMIN")' />
-				<security:logout />
-				<security:form-login login-page="/login"
-					default-target-url="/"
-					authentication-failure-handler-ref="customFailureHandler" />
+		<security:csrf disabled="true" />
 
 
-				<security:headers disabled="true"></security:headers>
-			</security:http>
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/home" access="permitAll" />
+		<security:intercept-url pattern="/admin/**"
+			access='hasRole("ROLE_ADMIN")' />
+		<security:intercept-url pattern="/board/view"
+			access='hasRole("ROLE_USER") or hasRole("ROLE_ADMIN")' />
+		<security:intercept-url pattern="/board/write"
+			access='hasRole("ROLE_USER") or hasRole("ROLE_ADMIN")' />
+		<security:intercept-url pattern="/board/update"
+			access='hasRole("ROLE_USER") or hasRole("ROLE_ADMIN")' />
+		<security:intercept-url pattern="/board/delete"
+			access='hasRole("ROLE_USER") or hasRole("ROLE_ADMIN")' />
+		<security:logout />
+		<security:form-login login-page="/login"
+			default-target-url="/" authentication-failure-handler-ref="customFailureHandler" />
+
+
+		<security:headers disabled="true"></security:headers>
+	</security:http>
 
 </beans>

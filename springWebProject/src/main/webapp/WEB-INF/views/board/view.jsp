@@ -5,11 +5,23 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
+
+<script>
+	function deleteConfirm(){
+		if(confirm("게시물을 삭제 하시겠습니까?")) {
+			location.href="${pageContext.request.contextPath}/board/delete?bno=${board.bno}";
+		}
+		else {
+			return false;
+		}
+	}
+
+</script>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 <div class="container-wrapper">
 	<div class="container">
 
-		<table  class="board_view">
+		<table class="board_view">
 			<tr>
 				<th><h4>제목</h4></th>
 				<td><h4>${board.title}</h4></td>
@@ -22,7 +34,7 @@
 			<tr>
 				<th>작성일</th>
 				<td><fmt:formatDate value="${board.regdate}"
-							pattern="yyyy-MM-dd HH:mm:ss" /></td>
+						pattern="yyyy-MM-dd HH:mm:ss" /></td>
 			</tr>
 			<tr>
 				<th>작성자</th>
@@ -33,24 +45,20 @@
 				<td>${board.viewcnt}</td>
 			</tr>
 
-			<tr>
-				<th>내용</th>
-			</tr>
 
 			<tbody>
-					<td class="view_text">
-						<div>${board.content}</div>
-					</td>
+				<td class="view_text">
+					<div>${board.content}</div>
+				</td>
 			</tbody>
+
 		</table>
-
-
-
-
-
-
-
-
+		<c:if test="${approval == 'OK'}">
+			<a href="<c:url value="/board/update?bno=${board.bno}"/>"
+				class="btn btn-primary">수정</a>
+			<a onclick="deleteConfirm();"
+				class="btn btn-primary" style="color:white">삭제</a>
+		</c:if>
 
 
 	</div>

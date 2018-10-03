@@ -34,8 +34,6 @@ public class LoginController {
 			model.addAttribute("logoutMsg", "You have been logged out successfully");
 		}
 		
-		System.out.println(user);
-		
 		
 		return "login";
 	}

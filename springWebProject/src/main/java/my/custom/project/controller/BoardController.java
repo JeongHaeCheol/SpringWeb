@@ -1,5 +1,6 @@
 package my.custom.project.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -44,23 +46,25 @@ public class BoardController {
 
 	// 2. 게시글 작성
 	@RequestMapping(value = "write", method = RequestMethod.GET)
-	public String write(Model model, Board board) {
-		if(board == null) {
-		board = new Board();
-		}
-		model.addAttribute("board",board);
+	public String write(Board board, Model model) {
+
 		return "board/write"; // board 폴더 밑의 write.jsp
 	}
 
 	// 2.2 게시글 처리
-	@RequestMapping(value = "insert", method = RequestMethod.POST)
-	public RedirectView insert(Board board) throws Exception {
-		
-		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	// Parameter순서 ! Multiple Model Attribute를 할 경우가 있기 때문에 BindingResult는 연결할 모델의 바로 뒤에 와야한다.
+	@RequestMapping(value = "write", method = RequestMethod.POST)
+	public String writePost(@Valid Board board, BindingResult result, Model model) {
+    	
+		 if(result.hasErrors()) {
+	         return "board/write";
+	      }
+
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String name = user.getUsername();
 		board.setWriter(name);
 		boardService.create(board);
-		return new RedirectView("list"); // return "redirect:list";
+	    return "redirect:list";
 		// redirect를 걸어야 컨트롤러를 거치기 때문에 컨트롤러의 수행작업을 다시 수행할 수 있다.
 	}
 
@@ -71,34 +75,90 @@ public class BoardController {
 		boardService.increaseViewCnt(bno, session);
 		Board board = boardService.read(bno);
 		model.addAttribute("board", board);
+		
+		
+		/* 
+		 *security에서 intercept 없이 구현할 경우 이 방법 사용
+		 *비회원은 authentication.getPrincipal()이 "anonymousUser"를 리턴한다.
+		 *login.jsp에서 modelAttribute로 user를 요구하기 때문에 user 추가
+		 
+		 Authentication authentication =
+		 SecurityContextHolder.getContext().getAuthentication();
+		 
+		 if(authentication.getPrincipal().equals("anonymousUser"))
+		 { 
+			 model.addAttribute("user", new my.custom.project.model.User());
+			 return "login";
+		 }*/
+
+		User securityUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String name = securityUser.getUsername();
+
+		if (name.equals(board.getWriter())) {
+			model.addAttribute("approval", "OK");
+			logger.info("User Check in view : " + name + " / " + board.getWriter());
+		}
 
 		return "board/view";
 	}
 
 	// 4. 게시글 수정
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public String update(@RequestParam int bno, Model model) throws Exception {
+
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String name = user.getUsername();
+		Board board = boardService.getArticle(bno);
+
+		logger.info("User Check in view Post : " + name + " / " + board.getWriter());
+		if (!name.equals(board.getWriter())) {
+			return "redirect:list";
+		}
+
+		model.addAttribute("board", board);
+
+		logger.info("model print : " + model);
+
+		return "board/update";
+	}
+
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public RedirectView update(@Valid Board board, BindingResult result, HttpServletRequest request) throws Exception {
+	public String updatePost(@Valid Board board, BindingResult result, HttpServletRequest request) throws Exception {
+
+		logger.info("board print : " + board);
 
 		if (result.hasErrors()) {
-			logger.info("Form data has some errors");
+			logger.warn("Form data has some errors");
 			List<ObjectError> errors = result.getAllErrors();
 			for (ObjectError error : errors) {
-				logger.info(error.getDefaultMessage());
+				logger.warn(error.getDefaultMessage());
 			}
-			
-			//jsp 뷰에서 modelAttribute에 설정된 "board"와 이메소드의 매개변수 board가 연결되어 입력값 유지가 가능
-			return new RedirectView("update");
+
+			// jsp 뷰에서 modelAttribute에 설정된 "board"와 이메소드의 매개변수 board가 연결되어 입력값 유지가 가능
+			// Parameter와 Attribute 값이 그대로 유지되기 때문에  board/update를 리턴하면 된다.
+			// View 이름과 연결되기 때문에  "board/update" + ?bno=board.getBno(); 같은 실수는 하지 말자 
+			return "board/update";
 		}
 
 		boardService.update(board);
 
-		return new RedirectView("view");
+		return "redirect:view?bno=" + board.getBno();
 	}
-	
-	//5. 게시글 삭제
+
+	// 5. 게시글 삭제
 	@RequestMapping("delete")
-	public RedirectView delete(@RequestParam int bno)throws Exception {
+	public String delete(@RequestParam int bno) throws Exception {
+		
+		Board board = boardService.getArticle(bno);
+		
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String name = user.getUsername();
+		
+		if (!name.equals(board.getWriter())) {
+			return "redirect:list";
+		}
+
 		boardService.delete(bno);
-		return new RedirectView("list");
+		return "redirect:list";
 	}
 }

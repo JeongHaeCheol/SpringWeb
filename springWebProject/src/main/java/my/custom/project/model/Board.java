@@ -27,15 +27,13 @@ public class Board {
 	@Column
 	private int bno;
 	
-	@NotEmpty(message="The User name must not be null")
+	@NotEmpty(message="제목을 입력 해주세요")
 	private String title;
 	
-	@NotEmpty(message="The User name must not be null")
+	@NotEmpty(message="내용을 입력해주세요")
 	private String content;
 	
-	@NotEmpty(message="The User name must not be null")
 	private String writer;
-	
 	private Date regdate;
 	private int viewcnt;
 
