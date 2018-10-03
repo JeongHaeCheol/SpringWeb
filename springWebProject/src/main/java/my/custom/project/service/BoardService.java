@@ -29,6 +29,7 @@ public class BoardService {
 	}
 
 	public void create(Board board) {
+		// 수정 필요!!!!
 		String title = board.getTitle();
 		String content = board.getContent();
 		String writer = board.getWriter();
