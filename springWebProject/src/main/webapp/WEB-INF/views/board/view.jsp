@@ -7,15 +7,13 @@
 
 
 <script>
-	function deleteConfirm(){
-		if(confirm("게시물을 삭제 하시겠습니까?")) {
-			location.href="${pageContext.request.contextPath}/board/delete?bno=${board.bno}";
-		}
-		else {
+	function deleteConfirm() {
+		if (confirm("게시물을 삭제 하시겠습니까?")) {
+			location.href = "${pageContext.request.contextPath}/board/delete?bno=${board.bno}";
+		} else {
 			return false;
 		}
 	}
-
 </script>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 <div class="container-wrapper">
@@ -45,22 +43,43 @@
 				<td>${board.viewcnt}</td>
 			</tr>
 
-
-			<tbody>
-				<td class="view_text">
-					<div>${board.content}</div>
-				</td>
-			</tbody>
-
 		</table>
+
+
+
+		<div style="border: 1px solid; padding: 10px; width: 500px;">${board.content}</div>
+
+
+
+
 		<c:if test="${approval == 'OK'}">
-			<a href="<c:url value="/board/update?bno=${board.bno}"/>"
-				class="btn btn-primary">수정</a>
-			<a onclick="deleteConfirm();"
-				class="btn btn-primary" style="color:white">삭제</a>
+			<div style="position: relative; top: 10px; left: 400px;">
+				<a href="<c:url value="/board/update?bno=${board.bno}"/>"
+					class="btn btn-primary">수정</a> <a onclick="deleteConfirm();"
+					class="btn btn-primary" style="color: white">삭제</a>
+			</div>
 		</c:if>
 
 
+		<div style="position: relative; top: 10px; bottom: 20px;">
+			<table>
+				<tr>
+					<c:if test="${nextBoard != null}">
+						<th>다음글
+						<td><a
+							href="<c:url value="/board/view?bno=${nextBoard.bno}"/>">${nextBoard.title}</a></td>
+					</c:if>
+				</tr>
+
+				<tr>
+					<c:if test="${preBoard != null}">
+						<th>이전글
+						<td><a
+							href="<c:url value="/board/view?bno=${preBoard.bno}"/>">${preBoard.title}</a></td>
+					</c:if>
+				</tr>
+			</table>
+		</div>
 	</div>
 </div>
 </main>

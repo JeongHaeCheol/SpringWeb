@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.stereotype.Repository;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
+@Repository
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
 	
 	private String loginId = "username";

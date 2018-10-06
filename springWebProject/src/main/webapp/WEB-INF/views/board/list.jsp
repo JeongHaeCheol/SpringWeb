@@ -21,7 +21,7 @@
 				<th>조회수</th>
 			</tr>
 
-			<c:forEach var="board" items="${list}">
+			<c:forEach var="board" items="${curList}">
 				<tr>
 					<td>${board.bno}</td>
 					<td><a href="<c:url value="/board/view?bno=${board.bno}"/>">${board.title}</a></td>
@@ -32,6 +32,42 @@
 				</tr>
 			</c:forEach>
 		</table>
+
+
+		<div>
+			<c:if test="${pageConfig.curRange ne 1 }">
+				<a href="<c:url value="/board/list?curPage=1"/>">[처음]</a>
+			</c:if>
+			<c:if test="${pageConfig.curPage ne 1}">
+				<a
+					href="<c:url value="/board/list?curPage=${pageConfig.prevPage }"/>">[이전]</a>
+			</c:if>
+			<c:forEach var="pageNum" begin="${pageConfig.startPage}"
+				end="${pageConfig.endPage }">
+				<c:choose>
+					<c:when test="${pageNum eq  pageConfig.curPage}">
+						<span style="font-weight: bold;"><a
+							href="<c:url value="/board/list?curPage=${pageNum}"/>">${pageNum }</a></span>
+					</c:when>
+					<c:otherwise>
+						<a href="<c:url value="/board/list?curPage=${pageNum}"/>">${pageNum }</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if
+				test="${pageConfig.curPage ne pageConfig.pageCnt && pageConfig.pageCnt > 0}">
+				<a
+					href="<c:url value="/board/list?curPage=${pageConfig.nextPage}"/>">[다음]</a>
+			</c:if>
+			<c:if
+				test="${pageConfig.curRange ne pageConfig.rangeCnt && pageConfig.rangeCnt > 0}">
+				<a href="<c:url value="/board/list?curPage=${pageConfig.pageCnt}"/>">[끝]</a>
+			</c:if>
+		</div>
+
+		<div>총 게시글 수 : ${pageConfig.listCnt } / 총 페이지 수 :
+			${pageConfig.pageCnt } / 현재 페이지 : ${pageConfig.curPage } / 현재 블럭 :
+			${pageConfig.curRange } / 총 블럭 수 : ${pageConfig.rangeCnt }</div>
 
 
 	</div>

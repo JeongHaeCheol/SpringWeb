@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,38 +19,54 @@ public class BoardService {
 	
 	@Autowired
 	private BoardDao boardDao;
+
 	
+	public Board getNextBoard(int bno) {
+		return boardDao.getNextBoard(bno);
+	}
+	
+	public Board getPreBoard(int bno) {
+		return boardDao.getPreBoard(bno);
+	}
 
 	public List<Board> listAll() {
 		return boardDao.listAll();
 	}
 	
-	public Board getArticle(int bno) {
-		return boardDao.getArticle(bno);
+	public List<Board> selectPage(int startPage, int pageSize) {
+		return boardDao.selectPage(startPage, pageSize);
 	}
 
 	public void create(Board board) {
-		// 수정 필요 !!!!
-		String title = board.getTitle();
-		String content = board.getContent();
-		String writer = board.getWriter();
-		
-		title = title.replace("<", "&lt");
-		title = title.replace(">", "&gt");
-		
-		writer = writer.replace("<", "&lt");
-		writer = writer.replace(">", "&gt");
-		
-		title = title.replace(" ", "&nbsp;&nbsp;");
-		writer = writer.replace(" ", "&nbsp;&nbsp;");
-		
-		content = content.replace("\n", "<br>");
-		board.setTitle(title);
-		board.setContent(content);
-		board.setWriter(writer);
-		
+		convertToHTML(board);
 		boardDao.create(board);
 	}
+	
+	public Board read(int bno) {
+		return boardDao.read(bno);
+	}
+	
+	public Board readToReversedHTML(int bno) {
+		Board board = this.read(bno);
+		reverseToHTML(board);
+		return board;
+	}
+
+	public void update(Board board) {
+		Board originBoard = boardDao.read(board.getBno());
+		originBoard.setTitle(board.getTitle());
+		originBoard.setContent(board.getContent());
+		convertToHTML(originBoard);
+
+		boardDao.update(originBoard);
+	}
+
+	public void delete(int bno) {
+		boardDao.delete(bno);
+	}
+	
+	
+	
 
 	public void increaseViewCnt(int bno, HttpSession session) {
 		long update_time = 0;
@@ -68,16 +85,35 @@ public class BoardService {
 		
 	}
 
-	public Board read(int bno) {
-		return boardDao.read(bno);
-	}
 
-	public void update(Board board) {
-		boardDao.update(board);
-	}
+	
+	
+	public void convertToHTML(Board board) {
+		String title = board.getTitle();
+		String content = board.getContent();
 
-	public void delete(int bno) {
-		boardDao.delete(bno);
+		title = title.replace("<", "&lt");
+		title = title.replace(">", "&gt");
+		
+		title = title.replace(" ", "&nbsp;&nbsp;");
+		
+		content = content.replace("\n", "<br>");
+		board.setTitle(title);
+		board.setContent(content);
+	}
+	
+	public void reverseToHTML(Board board) {
+		String title = board.getTitle();
+		String content = board.getContent();
+		
+		title = title.replace("&lt", "<");
+		title = title.replace("&gt", ">");
+	
+		title = title.replace("&nbsp;&nbsp;", " ");
+
+		content = content.replace("<br>", "\n");
+		board.setTitle(title);
+		board.setContent(content);
 	}
 
 }

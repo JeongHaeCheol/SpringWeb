@@ -48,8 +48,7 @@ public class RegisterController {
 			user.setAuthority("ROLE_ADMIN");
 		else
 			user.setAuthority("ROLE_USER");
-		/*Cart cart = new Cart();
-		user.setCart(cart);*/
+		
 		userService.addUser(user);
 		
 		return "registerUserSuccess";
