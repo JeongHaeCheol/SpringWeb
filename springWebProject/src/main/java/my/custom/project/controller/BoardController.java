@@ -1,15 +1,21 @@
 package my.custom.project.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -21,21 +27,26 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import my.custom.project.commons.PageConfig;
 import my.custom.project.model.Board;
-
+import my.custom.project.model.Comment;
 import my.custom.project.service.BoardService;
+import my.custom.project.service.CommentService;
 
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
 
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	CommentService commentService;
 
 	// 1. 게시글 목록
 	@RequestMapping("list")
@@ -182,4 +193,73 @@ public class BoardController {
 		boardService.delete(bno);
 		return "redirect:list";
 	}
+	
+	
+	
+	
+	
+	 /**
+    * 댓글 등록(Ajax)
+     * @param board
+     * @param comment
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="addComment", method = RequestMethod.POST)
+    @ResponseBody
+    public String ajax_addComment(Board board, String comment) throws Exception{
+        
+    	User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String name = user.getUsername();
+		 logger.info("comment check!! : " + comment);
+        try{
+        	Comment cmt = new Comment();
+            cmt.setWriter(name); 
+            cmt.setB_code(board.getBno());
+            cmt.setComment(comment);
+            commentService.create(cmt);
+            
+           
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        return "success";
+    }
+    
+    /**
+     * 게시물 댓글 불러오기(Ajax)
+     * @param board
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="commentList", produces="application/json; charset=utf8")
+    @ResponseBody
+    public ResponseEntity ajax_commentList(Board board, HttpServletRequest request) throws Exception{
+        
+        HttpHeaders responseHeaders = new HttpHeaders();
+        ArrayList<HashMap> hmlist = new ArrayList<HashMap>();
+        
+        // 해당 게시물 댓글
+        List<Comment> commentList = commentService.getCommentListByBno(board.getBno());
+        
+        if(commentList.size() > 0){
+            for(int i=0; i<commentList.size(); i++){
+                HashMap hm = new HashMap();
+                hm.put("c_code", commentList.get(i).getC_code());
+                hm.put("comment", commentList.get(i).getComment());
+                hm.put("regdate", commentList.get(i).getRegdate());
+                hm.put("writer", commentList.get(i).getWriter());
+                
+                hmlist.add(hm);
+            }
+            
+        }
+        
+        JSONArray json = new JSONArray(hmlist);        
+        return new ResponseEntity(json.toString(), responseHeaders, HttpStatus.CREATED);
+        
+    }
+
 }

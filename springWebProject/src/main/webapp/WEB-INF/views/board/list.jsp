@@ -66,8 +66,7 @@
 		</div>
 
 		<div>총 게시글 수 : ${pageConfig.listCnt } / 총 페이지 수 :
-			${pageConfig.pageCnt } / 현재 페이지 : ${pageConfig.curPage } / 현재 블럭 :
-			${pageConfig.curRange } / 총 블럭 수 : ${pageConfig.rangeCnt }</div>
+			${pageConfig.pageCnt } / 현재 페이지 : ${pageConfig.curPage }</div>
 
 
 	</div>

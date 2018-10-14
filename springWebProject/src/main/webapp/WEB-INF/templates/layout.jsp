@@ -17,6 +17,8 @@
 <!-- Bootstrap core CSS -->
 <link href="<c:url value ="/resources/css/bootstrap.min.css"/>"
 	rel="stylesheet">
+
+
 <link href="<c:url value="/resources/css/dashboard.css"/>"
 	rel="stylesheet">
 
@@ -25,26 +27,10 @@
 	rel="stylesheet">
 
 
-</head>
-
-<tiles:insertAttribute name="header" />
-<tiles:insertAttribute name="menu" />
-
-<body id="containerId">
-	<div class="container-fluid">
-		<div class="row">
 
 
-			<tiles:insertAttribute name="body" />
-
-		</div>
-	</div>
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 		crossorigin="anonymous"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -75,12 +61,31 @@
 					+ "px";
 		}
 		relatedPos();
-		
-		
+
 		$(window).resize(function() {
 			relatedPos();
 		});
 	</script>
+
+</head>
+
+<tiles:insertAttribute name="header" />
+<tiles:insertAttribute name="menu" />
+
+<body id="containerId">
+	<div class="container-fluid">
+		<div class="row">
+
+
+			<tiles:insertAttribute name="body" />
+
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	
 
 
 </body>

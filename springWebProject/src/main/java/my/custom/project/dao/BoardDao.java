@@ -21,7 +21,7 @@ import my.custom.project.model.Board;
 @Transactional
 public class BoardDao {
 
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	private static final Logger logger = LoggerFactory.getLogger(BoardDao.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -34,6 +34,8 @@ public class BoardDao {
 		session.saveOrUpdate(board);
 		session.flush();
 	}
+	
+	
 
 	public void increaseViewcnt(int bno) {
 		Session session = sessionFactory.getCurrentSession();
