@@ -15,6 +15,7 @@
 		}
 	}
 </script>
+
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 <div class="container-wrapper">
 	<div class="container">
@@ -43,6 +44,7 @@
 				<td>${board.viewcnt}</td>
 			</tr>
 
+
 		</table>
 
 
@@ -50,6 +52,24 @@
 		<div style="border: 1px solid; padding: 10px; width: 500px;">${board.content}</div>
 
 
+		<div>
+			<c:choose>
+				<c:when test="${empty board.imageFilename}">
+					<div>
+						<img id="profileImg"
+							src="/springWebProject/displayFile?fileName=/tempImg.gif"
+							style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div>
+						<img id="profileImg"
+							src="/springWebProject/displayFile?fileName=/${board.imageFilename}"
+							style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</div>
 
 
 		<c:if test="${approval == 'OK'}">
@@ -83,7 +103,5 @@
 	</div>
 </div>
 
-<%@ include file="comment.jsp" %>
-
-</main>
+<%@ include file="comment.jsp"%> </main>
 

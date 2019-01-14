@@ -9,7 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -40,9 +43,16 @@ public class Board {
 	
 	private int groupLayer;
 	
+	private String imageFilename;
+	
 	
 	private String writer;
 	private Date regdate;
 	private int viewcnt;
+	
+	@Transient
+	private MultipartFile imageFile;
+	
+
 
 }

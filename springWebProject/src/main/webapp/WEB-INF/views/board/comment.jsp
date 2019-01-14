@@ -21,7 +21,7 @@
 								id="comment" name="comment" placeholder="댓글을 입력하세요"></textarea>
 							<br>
 							<div>
-								<a href='#' onClick="fn_comment('${board.bno}')"
+								<a href='' onClick="fn_comment('${board.bno}')"
 									class="btn pull-right btn-success">등록</a>
 							</div></td>
 					</tr>
@@ -31,9 +31,12 @@
 		<input type="hidden" id="b_code" name="b_code" value="${board.bno}" />
 	</form>
 </div>
+
 <div class="container">
 	<form id="commentListForm" name="commentListForm" method="post">
-		<div id="commentList"></div>
+		<input type="hidden" id="bno" name="bno"
+			value="${board.bno}"/>
+		
 	</form>
 </div>
 
@@ -78,7 +81,7 @@
 					type : 'GET',
 					url : "<c:url value='/board/commentList'/>",
 					dataType : "json",
-					data : $("#commentForm").serialize(),
+					data : $("#commentListForm").serialize(),
 					contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 					success : function(data) {
 
@@ -110,7 +113,7 @@
 						}
 
 						$("#cCnt").html(cCnt);
-						$("#commentList").html(html);
+						$("#commentListForm").html(html);
 
 					},
 					error : function(request, status, error) {

@@ -25,6 +25,9 @@
 <!-- Custom styles for this template -->
 <link href="<c:url value="/resources/css/mycustom.css?ver=1"/>"
 	rel="stylesheet">
+	
+
+
 
 
 
@@ -40,6 +43,32 @@
 
 	<!-- Icons -->
 	<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+
+
+</head>
+
+<tiles:insertAttribute name="header" />
+<tiles:insertAttribute name="menu" />
+
+<body id="containerId">
+	<div class="container-fluid">
+		<div class="row">
+
+
+			<tiles:insertAttribute name="body" />
+
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	
+
+
+</body>
+
+
 	<script>
 		feather.replace()
 
@@ -66,27 +95,6 @@
 			relatedPos();
 		});
 	</script>
-
-</head>
-
-<tiles:insertAttribute name="header" />
-<tiles:insertAttribute name="menu" />
-
-<body id="containerId">
-	<div class="container-fluid">
-		<div class="row">
-
-
-			<tiles:insertAttribute name="body" />
-
-		</div>
-	</div>
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
 	
-
-
-</body>
+	
 </html>
