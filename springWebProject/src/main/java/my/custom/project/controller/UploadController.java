@@ -94,14 +94,14 @@ public class UploadController {
 		InputStream in = null;
 		ResponseEntity<byte[]> entity = null;
 
-		logger.info("FILE NAME: " + fileName);
+		logger.info("File Name: " + fileName);
 
 		try {
 			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
 			MediaType mType = MediaUtils.getMediaType(formatName);
 			HttpHeaders headers = new HttpHeaders();
 			
-			logger.info("file test name : " + uploadPath+ fileName);
+			logger.info("File Name included path : " + uploadPath+ fileName);
 
 			in = new FileInputStream(uploadPath + fileName);
 

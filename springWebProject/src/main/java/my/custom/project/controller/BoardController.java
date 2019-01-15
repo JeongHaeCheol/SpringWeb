@@ -65,7 +65,7 @@ public class BoardController {
 		List<Board> list = boardService.listAll();
 		int listCnt = list.size();
 		PageConfig pageConfig = new PageConfig(listCnt, curPage);
-		List<Board> curList = boardService.selectPage(pageConfig.getStartIndex(), pageConfig.getPageSize());
+		List<Board> curList = boardService.selectPage(pageConfig.getStartIndex(), pageConfig.getPageSize(),  null	);
 
 		logger.info("현재페이지, 페이지 사이즈 : " + pageConfig.getStartIndex() + " / " + pageConfig.getPageSize());
 		model.addAttribute("curList", curList);
@@ -74,6 +74,24 @@ public class BoardController {
 
 		return "board/list";
 	}
+	
+	// 1-2. 검색을 통한 게시글 리스트
+	@RequestMapping("search")
+	public String search(Model model, @RequestParam(defaultValue = "1") int curPage, @RequestParam String word) throws Exception {
+
+		int listCnt = boardService.getCount_searchByTitle(word);
+		PageConfig pageConfig = new PageConfig(listCnt, curPage);
+		List<Board> searchResultList = boardService.selectPage(pageConfig.getStartIndex(), pageConfig.getPageSize(), "0", word);
+
+		logger.info("현재페이지, 페이지 사이즈 : " + pageConfig.getStartIndex() + " / " + pageConfig.getPageSize());
+		model.addAttribute("curList", searchResultList);
+		model.addAttribute("listCnt", listCnt);
+		model.addAttribute("pageConfig", pageConfig);
+
+		return "board/list";
+	}
+	
+	
 
 	// 2. 게시글 작성
 	@RequestMapping(value = "write", method = RequestMethod.GET)
@@ -121,7 +139,6 @@ public class BoardController {
 		UUID uid = UUID.randomUUID();
 		String savedName = uid.toString() + "_" + originalName;
 
-		logger.info("Board 컨트롤러에서 파일 생성 출력2 " + savedName);
 		File target = new File(uploadPath, savedName);
 		FileCopyUtils.copy(fileData, target);
 		return savedName;
@@ -216,7 +233,6 @@ public class BoardController {
 		
 		String fileName = array[array.length - 1];
 		
-		logger.info(" 파일명 결과 !!! : " + fileName );
 
 		String savedName = "temp";
 		try {
@@ -229,8 +245,6 @@ public class BoardController {
 		}
 		board.setImageFilename(savedName);
 		
-		logger.info("업데이트 전 결과 : "  + board.getImageFilename());
-
 		boardService.update(board);
 
 		return "redirect:view?bno=" + board.getBno();
@@ -290,7 +304,6 @@ public class BoardController {
 
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String name = user.getUsername();
-		logger.info("comment check!! : " + comment);
 		try {
 			Comment cmt = new Comment();
 			cmt.setWriter(name);

@@ -7,7 +7,8 @@
 <nav  id="headerId"
 	class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow w-100">
 	<a class="navbar-brand col-sm-3 col-md-2 mr-0"
-		href="${pageContext.request.contextPath}/">Hae Cheol's Web</a> <input
+		href="${pageContext.request.contextPath}/">Hae Cheol's Web</a> 
+		<input id="searchBar"
 		class="form-control form-control-dark col-md-8 w-100" type="text"
 		placeholder="Search" aria-label="Search">
 
@@ -41,3 +42,15 @@
 </nav>
 
 </header>
+
+
+<script>
+	$("#searchBar").keydown(function(key){
+		var word = $(this).val();
+		if(key.keyCode == 13) {
+			window.location.href = "${pageContext.request.contextPath}/board/search?curPage=1&word=" + word;
+		}
+	})
+
+
+</script>

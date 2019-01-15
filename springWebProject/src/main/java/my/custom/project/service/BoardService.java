@@ -41,9 +41,23 @@ public class BoardService {
 	public List<Board> listAll() {
 		return boardDao.listAll();
 	}
+	
+	public int getCount_searchByTitle(String word) {
+		return boardDao.getCount_searchByTitle(word);
+	}
+	
 
-	public List<Board> selectPage(int startPage, int pageSize) {
-		return boardDao.selectPage(startPage, pageSize);
+	public List<Board> selectPage(int startPage, int pageSize, String... searchFilter) {
+		
+		logger.info("list 진입 성공");
+		if(searchFilter != null) {
+			logger.info("searchFilter not null");
+			return boardDao.selectPage(startPage, pageSize, searchFilter);
+		}
+		else {
+			logger.info("searchFilter null");
+			return boardDao.selectPage(startPage, pageSize, null);
+		}
 	}
 
 	public void create(Board board) {
