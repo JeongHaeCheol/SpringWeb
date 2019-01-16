@@ -42,20 +42,20 @@ public class BoardService {
 		return boardDao.listAll();
 	}
 	
-	public int getCount_searchByTitle(String word) {
-		return boardDao.getCount_searchByTitle(word);
+	public int getCount_searchByFilter(String word, String filter) {
+		return boardDao.getCount_searchByFilter(word, filter);
 	}
+	
+
 	
 
 	public List<Board> selectPage(int startPage, int pageSize, String... searchFilter) {
 		
-		logger.info("list 진입 성공");
+
 		if(searchFilter != null) {
-			logger.info("searchFilter not null");
 			return boardDao.selectPage(startPage, pageSize, searchFilter);
 		}
 		else {
-			logger.info("searchFilter null");
 			return boardDao.selectPage(startPage, pageSize, null);
 		}
 	}
@@ -84,7 +84,6 @@ public class BoardService {
 		String filePath = uploadPath + "\\" + originBoard.getImageFilename();
 
 		File file = new File(filePath);
-		logger.info("이미지 삭제 경로 : " + filePath);
 
 		if (file.exists()) {
 
@@ -154,5 +153,6 @@ public class BoardService {
 		board.setTitle(title);
 		board.setContent(content);
 	}
+
 
 }

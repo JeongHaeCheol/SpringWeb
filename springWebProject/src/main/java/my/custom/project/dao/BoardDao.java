@@ -47,42 +47,47 @@ public class BoardDao {
 		return boardList;
 	}
 
-	public int getCount_searchByTitle(String word) {
+	public int getCount_searchByFilter(String word, String filter) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session
-				.createQuery("select count(*) from Board  where title like " + "'%" + word + "%'" + " order by bno DESC,  regdate DESC");
-		int count =  Math.toIntExact((long) query.uniqueResult());
+		Query query = session.createQuery("select count(*) from Board  where " + filter+" like '%" + word + "%'"
+				+ " order by bno DESC,  regdate DESC");
+		int count = Math.toIntExact((long) query.uniqueResult());
 		return count;
 	}
+	
 
 	public List<Board> selectPage(int startPage, int pageSize, String... searchFilter) {
 
 		Session session = sessionFactory.getCurrentSession();
-		
+
 		List<Board> boardList = null;
-		
-		
+
 		if (searchFilter != null) {
-			System.out.println("서치필터 낫널 dao");
+
 			switch (searchFilter[0]) {
-			case "0":
+			case "title":
 				boardList = session
-				.createQuery("from Board where title like " + "'%" + searchFilter[1] + "%'" + " order by bno DESC,  regdate DESC").setFirstResult(startPage).setMaxResults(pageSize).list();
+						.createQuery("from Board where title like " + "'%" + searchFilter[1] + "%'"
+								+ " order by bno DESC,  regdate DESC")
+						.setFirstResult(startPage).setMaxResults(pageSize).list();
 				break;
-			case "1":
+			case "content":
 				boardList = session
-				.createQuery("from Board where content like " + "'%" + searchFilter[1] + "%'" + " order by bno DESC,  regdate DESC").setFirstResult(startPage).setMaxResults(pageSize).list();
+						.createQuery("from Board where content like " + "'%" + searchFilter[1] + "%'"
+								+ " order by bno DESC,  regdate DESC")
+						.setFirstResult(startPage).setMaxResults(pageSize).list();
 				break;
-			case "2":
+			case "writer":
 				boardList = session
-				.createQuery("from Board where writer like " + "'%" + searchFilter[1] + "%'" + " order by bno DESC,  regdate DESC").setFirstResult(startPage).setMaxResults(pageSize).list();
+						.createQuery("from Board where writer like " + "'%" + searchFilter[1] + "%'"
+								+ " order by bno DESC,  regdate DESC")
+						.setFirstResult(startPage).setMaxResults(pageSize).list();
 				break;
 			}
-		}
-		else {
-			System.out.println("서치필터 널 dao");
-		boardList = session.createQuery("from Board order by bno DESC,  regdate DESC")
-				.setFirstResult(startPage).setMaxResults(pageSize).list();
+		} else {
+
+			boardList = session.createQuery("from Board order by bno DESC,  regdate DESC").setFirstResult(startPage)
+					.setMaxResults(pageSize).list();
 		}
 		return boardList;
 	}
@@ -134,5 +139,6 @@ public class BoardDao {
 		return preBoard;
 
 	}
+
 
 }
