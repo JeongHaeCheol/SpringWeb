@@ -6,11 +6,11 @@
 
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-<div class="container-wrapper">
+<div class="container-wrapper" style="margin-bottom:70px;">
 	<div class="container">
-		<h2>게시글 목록</h2>
+		<h2  style="margin-top:10px;">게시글 목록</h2>
 		<div style="float: right;">
-			<a href="<c:url value="/board/write"/>" class="btn btn-primary">글쓰기</a>
+			<a href="<c:url value="/board/write"/>" class="btn btn-primary myButton" style="margin: 10px 10px 10px 10px;">글쓰기</a>
 		</div>
 		<table class="table table-hover" boarder="1" width="600px">
 			<tr>

@@ -77,11 +77,13 @@ public class BoardController {
 
 	// 1-2. 검색을 통한 게시글 리스트
 	@RequestMapping("search")
-	public String search(Model model, @RequestParam(defaultValue = "1") int curPage, @RequestParam String word, @RequestParam String filter) throws Exception {
+	public String search(Model model, @RequestParam(defaultValue = "1") int curPage, @RequestParam String word,
+			@RequestParam String filter) throws Exception {
 
-		int listCnt = boardService.getCount_searchByFilter(word, filter);			
+		int listCnt = boardService.getCount_searchByFilter(word, filter);
 		PageConfig pageConfig = new PageConfig(listCnt, curPage);
-		List<Board> searchResultList = boardService.selectPage(pageConfig.getStartIndex(), pageConfig.getPageSize(), filter, word);
+		List<Board> searchResultList = boardService.selectPage(pageConfig.getStartIndex(), pageConfig.getPageSize(),
+				filter, word);
 
 		logger.info("현재페이지, 페이지 사이즈 : " + pageConfig.getStartIndex() + " / " + pageConfig.getPageSize());
 		model.addAttribute("curList", searchResultList);
@@ -116,16 +118,19 @@ public class BoardController {
 
 		MultipartFile imageFile = board.getImageFile();
 
-		String savedName = "temp";
-		try {
-			savedName = uploadFile(imageFile.getOriginalFilename(), imageFile.getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
+		String savedName = "temp";
+
+		if (!imageFile.getOriginalFilename().equals("")) {
+			try {
+				savedName = uploadFile(imageFile.getOriginalFilename(), imageFile.getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		board.setImageFilename(savedName);
 
 		boardService.create(board);
@@ -213,6 +218,13 @@ public class BoardController {
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String updatePost(@Valid Board board, BindingResult result, HttpServletRequest request) throws Exception {
 
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String name = user.getUsername();
+
+		if (!name.equals(board.getWriter())) {
+			return "redirect:list";
+		}
+
 		if (result.hasErrors()) {
 			logger.warn("Form data has some errors");
 			List<ObjectError> errors = result.getAllErrors();
@@ -232,10 +244,13 @@ public class BoardController {
 		String[] array = tempName.split("\\\\");
 
 		String fileName = array[array.length - 1];
-
+		
+		logger.info("1 : " + fileName);
+		
 		String savedName = "temp";
 		try {
 			savedName = uploadFile(fileName, imageFile.getBytes());
+			logger.info("2 : " + savedName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -243,9 +258,10 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		board.setImageFilename(savedName);
-
+		
 		boardService.update(board);
-
+		
+		logger.info(board.getImageFilename());
 		return "redirect:view?bno=" + board.getBno();
 	}
 
@@ -309,6 +325,29 @@ public class BoardController {
 			cmt.setB_code(b_code);
 			cmt.setComment(comment);
 			commentService.create(cmt);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "success";
+	}
+
+	@RequestMapping(value = "deleteComment", method = RequestMethod.POST)
+	@ResponseBody
+	public String ajax_deleteComment(int c_code) throws Exception {
+
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String name = user.getUsername();
+		Comment comment = commentService.getCommentByC_code(c_code);
+		String writer = comment.getWriter();
+
+		try {
+			if (writer.equals(name)) {
+				commentService.delete(comment);
+			} else {
+				return "No permission";
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

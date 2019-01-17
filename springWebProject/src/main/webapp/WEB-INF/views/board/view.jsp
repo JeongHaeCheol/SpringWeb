@@ -53,17 +53,17 @@
 
 
 		<div>
-			<c:choose>
+				<c:choose>
 				<c:when test="${empty board.imageFilename}">
 					<div>
-						<img id="profileImg"
+						<img id="uploadedImg"
 							src="/springWebProject/displayFile?fileName=/tempImg.gif"
 							style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
 					</div>
 				</c:when>
 				<c:otherwise>
 					<div>
-						<img id="profileImg"
+						<img id="uploadedImg"
 							src="/springWebProject/displayFile?fileName=/${board.imageFilename}"
 							style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
 					</div>

@@ -8,8 +8,7 @@
 
 <div class="container">
 	<form id="commentForm" name="commentForm" method="post">
-		<br>
-		<br>
+		<br> <br>
 		<div>
 			<div>
 				<span><strong>Comments</strong></span> <span id="cCnt"></span>
@@ -21,7 +20,7 @@
 								id="comment" name="comment" placeholder="댓글을 입력하세요"></textarea>
 							<br>
 							<div>
-								<a href='' onClick="fn_comment('${board.bno}')"
+								<a href='' onClick="fn_comment()"
 									class="btn pull-right btn-success">등록</a>
 							</div></td>
 					</tr>
@@ -34,17 +33,14 @@
 
 <div class="container">
 	<form id="commentListForm" name="commentListForm" method="post">
-		<input type="hidden" id="bno" name="bno"
-			value="${board.bno}"/>
-		
+		<input type="hidden" id="bno" name="bno" value="${board.bno}" />
+
 	</form>
+	<div id="commentList"></div>
 </div>
 
 <script>
-	/*
-	 * 댓글 등록하기(Ajax)
-	 */
-	function fn_comment(code) {
+	function fn_comment() {
 
 		$.ajax({
 			type : 'POST',
@@ -54,6 +50,28 @@
 				if (data == "success") {
 					getCommentList();
 					$("#comment").val("");
+				}
+			},
+			error : function(request, status, error) {
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+
+		});
+	}
+
+	function delete_comment(code) {
+		$.ajax({
+			type : 'POST',
+			url : "<c:url value='/board/deleteComment'/>",
+			data : {
+				"c_code" : code
+			},
+			success : function(data) {
+				if (data == "success") {
+					getCommentList();
+				}
+				else if(data == "No permission"){
+					alert("권한 없음");
 				}
 			},
 			error : function(request, status, error) {
@@ -77,14 +95,14 @@
 	 */
 	function getCommentList() {
 
-		$.ajax({
+		$
+				.ajax({
 					type : 'GET',
 					url : "<c:url value='/board/commentList'/>",
 					dataType : "json",
 					data : $("#commentListForm").serialize(),
 					contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 					success : function(data) {
-
 						var html = "";
 						var cCnt = data.length;
 
@@ -97,6 +115,9 @@
 										+ "</strong>"
 										+ "&nbsp&nbsp"
 										+ data[i].regdate
+										+ "<button type='button' class='commentDelete' style='margin-left: 10px; padding:3px 3px;font-size: 12px;' onClick='delete_comment("
+										+ data[i].c_code
+										+ ")'>삭제</button>"
 										+ "</h6>";
 								html += data[i].comment + "<tr><td></td></tr>";
 								html += "</table></div>";
@@ -113,13 +134,13 @@
 						}
 
 						$("#cCnt").html(cCnt);
-						$("#commentListForm").html(html);
-
+						$("#commentList").html(html);
 					},
 					error : function(request, status, error) {
 
 					}
 
 				});
+
 	}
 </script>

@@ -12,12 +12,12 @@
 			</li>
 			<li class="nav-item"><a class="nav-link" href="<c:url value="/board/list"/>"> <span
 					data-feather="file">
-					</span>게시판</a> 
+					</span>Board</a> 
 			</li>
 			<li class="nav-item"><a class="nav-link" href="#"> <span
-					data-feather="shopping-cart"></span> Products
+					data-feather="bar-chart-2"></span> Projects
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="#"> <span
+			<!-- <li class="nav-item"><a class="nav-link" href="#"> <span
 					data-feather="users"></span> Customers
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="#"> <span
@@ -25,7 +25,7 @@
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="#"> <span
 					data-feather="layers"></span> Integrations
-			</a></li>
+			</a></li> -->
 		</ul>
 
 		<h6

@@ -56,14 +56,14 @@
 				<c:choose>
 					<c:when test="${empty imageFile}">
 						<div>
-							<img id="profileImg"
+							<img id="uploadImg"
 								src="/springWebProject/displayFile?fileName=/tempImg.gif"
 								style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div>
-							<img id="profileImg"
+							<img id="uploadImg"
 								src="/springWebProject/displayFile?fileName=${imageFile}"
 								style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
 						</div>
@@ -88,13 +88,47 @@
 
 <script>
 	$(document).ready(function() {
-		$("#profileImg").click(function() {
+		$("#uploadImg").click(function() {
 			$("#imageFile").click();
 		})
 	})
 </script>
 
 
+<script>
+	var sel_file;
+
+	$(document).ready(function() {
+		$("#imageFile").on("change", fileChange);
+	});
+
+	function fileChange(e) {
+		e.preventDefault();
+
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+
+		filesArr.forEach(function(f) {
+			if (!f.type.match("image.*")) {
+				alert("확장자는 이미지 확장자만 가능합니다.");
+				return;
+			}
+
+			sel_file = f;
+
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$("#uploadImg").attr("src", e.target.result);
+				$("#uploadImg").css("height", "100px")
+			}
+			reader.readAsDataURL(f);
+		});
+
+		var file = files[0]
+		console.log(file);
+		
+	}
+</script>
 
 
 

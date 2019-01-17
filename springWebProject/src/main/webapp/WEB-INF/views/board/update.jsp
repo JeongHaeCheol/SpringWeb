@@ -56,16 +56,16 @@
 
 			<div style="clear:left;">
 				<c:choose>
-					<c:when test="${empty board.imageFilename}">
+					<c:when test="${board.imageFilename == 'temp'}">
 						<div>
-							<img id="profileImg"
+							<img id="uploadImg"
 								src="/springWebProject/displayFile?fileName=/tempImg.gif"
 								style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div>
-							<img id="profileImg"
+							<img id="uploadImg"
 								src="/springWebProject/displayFile?fileName=/${board.imageFilename}"
 								style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
 						</div>
@@ -90,7 +90,7 @@
 
 <script>
 	$(document).ready(function() {
-		$("#profileImg").click(function() {
+		$("#uploadImg").click(function() {
 			$("#imageFile").click();
 		})
 	})
@@ -122,58 +122,14 @@
 
 			var reader = new FileReader();
 			reader.onload = function(e) {
-				$("#profileImg").attr("src", e.target.result);
-				$("#profileImg").css("height", "100px")
+				$("#uploadImg").attr("src", e.target.result);
+				$("#uploadImg").css("height", "100px")
 			}
 			reader.readAsDataURL(f);
 		});
 
 		var file = files[0]
 		console.log(file)
-		var formData = new FormData();
-
-		formData.append("file", file);
-
-		$.ajax({
-			url : '/uploadAjax',
-			data : formData,
-			dataType : 'text',
-			processData : false,
-			contentType : false,
-			type : 'POST',
-			success : function(data) {
-
-				alert("프로필 이미지가 변경 되었습니다.")
-
-			}
-		})
-
-		function checkImageType(fileName) {
-			var pattern = /jpg$|gif$|png$|jpeg$/i;
-			return fileName.match(pattern);
-		}
-
-		function getOriginalName(fileName) {
-			if (checkImageType(fileName)) {
-				return;
-			}
-
-			var idx = fileName.indexOf("_") + 1;
-			return fileName.substr(idx);
-
-		}
-
-		function getImageLink(fileName) {
-
-			if (!checkImageType(fileName)) {
-				return;
-			}
-			var front = fileName.substr(0, 12);
-			var end = fileName.substr(14);
-
-			return front + end;
-
-		}
-
+		
 	}
 </script>

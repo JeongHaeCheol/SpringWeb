@@ -1,3 +1,19 @@
+.commentUpdate{
+	margin-left: 10px;
+	padding:3px 3px;
+	font-size: 12px;
+}
+
+.commentDelete{
+	padding:3px 3px;
+	font-size: 12px;
+}
+
+
+.myButton{
+	margin: 10px 10px 10px 10px;
+}
+
 .button-1{
   margin-right: 10px;
   width:120px;
