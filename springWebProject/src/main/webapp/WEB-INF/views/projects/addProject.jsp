@@ -11,11 +11,11 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 <div class="container-wrapper">
 	<div class="container">
-		<h1>글쓰기</h1>
+		<h1>프로젝트 추가</h1>
 
-		<sf:form id="writeArticle"
-			action="${pageContext.request.contextPath}/board/write" method="post"
-			modelAttribute="board" enctype="multipart/form-data">
+		<sf:form id="addProjectForm"
+			action="${pageContext.request.contextPath}/projects/addProject"
+			method="post" modelAttribute="project" enctype="multipart/form-data">
 
 			<div class="form-group">
 				<label for="title">제목</label>
@@ -36,9 +36,9 @@
 
 
 			<div class="form-group">
-				<label for="imageFile">이미지 업로드</label>
+				<label for="imageFilenames">이미지 업로드</label>
 			</div>
-			<sf:errors path="imageFile" cssStyle="color:#ff0000;" />
+			<sf:errors path="imageFilenames" cssStyle="color:#ff0000;" />
 			<div>
 				<div class="file_input_textbox">
 					<input type="text" id="fileName" readonly="readonly" />
@@ -46,15 +46,16 @@
 
 				<div class="file_input_div">
 					<input type="button" value="Search files" class="file_input_button" />
-					<sf:input type="file" path="imageFile" id="imageFile"
-						class="file_input_hidden" title="&nbsp;"
+					<sf:input multiple="multiple" path="imageFiles" id="imageFiles" type="file" class="file_input_hidden"
+						title="&nbsp;"
 						onchange="javascript: document.getElementById('fileName').value = this.value" />
 				</div>
+
 			</div>
 
 			<div style="clear: left;">
 				<c:choose>
-					<c:when test="${empty imageFile}">
+					<c:when test="${empty imageFilenames}">
 						<div>
 							<img id="uploadImg"
 								src="/springWebProject/displayFile?fileName=/tempImg.gif"
@@ -64,7 +65,7 @@
 					<c:otherwise>
 						<div>
 							<img id="uploadImg"
-								src="/springWebProject/displayFile?fileName=${imageFile}"
+								src="/springWebProject/displayFile?fileName=${imageFilenames}"
 								style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
 						</div>
 					</c:otherwise>
@@ -74,62 +75,14 @@
 
 
 			<sf:button type="submit" class="btn btn-primary">완료</sf:button>
-			<a href="<c:url value="/board/list"/>" class="btn btn-primary">취소</a>
-
+			<a href="<c:url value="/projects/projectList"/>"
+				class="btn btn-primary">취소</a>
 
 		</sf:form>
-
 
 	</div>
 </div>
 </main>
-
-
-
-<script>
-	$(document).ready(function() {
-		$("#uploadImg").click(function() {
-			$("#imageFile").click();
-		})
-	})
-</script>
-
-
-<script>
-	var sel_file;
-
-	$(document).ready(function() {
-		$("#imageFile").on("change", fileChange);
-	});
-
-	function fileChange(e) {
-		e.preventDefault();
-
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-
-		filesArr.forEach(function(f) {
-			if (!f.type.match("image.*")) {
-				alert("확장자는 이미지 확장자만 가능합니다.");
-				return;
-			}
-
-			sel_file = f;
-
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$("#uploadImg").attr("src", e.target.result);
-				$("#uploadImg").css("height", "100px")
-			}
-			reader.readAsDataURL(f);
-		});
-
-		var file = files[0]
-		console.log(file);
-		
-	}
-</script>
-
 
 
 

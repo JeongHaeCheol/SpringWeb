@@ -14,7 +14,7 @@
 					data-feather="file">
 					</span>Board</a> 
 			</li>
-			<li class="nav-item"><a class="nav-link" href="#"> <span
+			<li class="nav-item"><a class="nav-link" href="<c:url value="/projects/list"/>"> <span
 					data-feather="bar-chart-2"></span> Projects
 			</a></li>
 			<!-- <li class="nav-item"><a class="nav-link" href="#"> <span

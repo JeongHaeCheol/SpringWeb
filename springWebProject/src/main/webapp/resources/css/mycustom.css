@@ -1,10 +1,11 @@
-.commentUpdate{
+.comment-update{
 	margin-left: 10px;
 	padding:3px 3px;
 	font-size: 12px;
 }
 
-.commentDelete{
+.comment-delete{
+	margin-left: 10px;
 	padding:3px 3px;
 	font-size: 12px;
 }

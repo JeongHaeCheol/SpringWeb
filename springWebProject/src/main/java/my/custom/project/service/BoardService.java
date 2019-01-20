@@ -16,17 +16,17 @@ import org.springframework.stereotype.Service;
 import my.custom.project.controller.BoardController;
 import my.custom.project.dao.BoardDao;
 import my.custom.project.model.Board;
+import my.custom.project.util.UploadFileUtils;
 
 @Service
 public class BoardService {
 
 	private static final Logger logger = LoggerFactory.getLogger(BoardService.class);
 	
+	private UploadFileUtils uploadFileUtils = new UploadFileUtils();
+	
 	@Autowired
 	private BoardDao boardDao;
-	
-	@Resource(name = "uploadPath")
-	private String uploadPath;
 	
 
 	
@@ -81,7 +81,7 @@ public class BoardService {
 		originBoard.setContent(board.getContent());
 		
 		
-		String filePath = uploadPath + "\\" + originBoard.getImageFilename();
+		String filePath = uploadFileUtils.getUploadPath() + "\\" + originBoard.getImageFilename();
 
 		File file = new File(filePath);
 

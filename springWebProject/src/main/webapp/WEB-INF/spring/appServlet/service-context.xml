@@ -10,9 +10,7 @@
 	</context:component-scan>
 
 
-	<bean id="uploadPath" class="java.lang.String">
-		<constructor-arg value="C:\Users\irvin\Desktop\eclipse workspace\springWebProject\src\main\webapp\resources\profileImage" />
-	</bean>
+
 
 
 </beans>

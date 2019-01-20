@@ -1,0 +1,40 @@
+.projectlist-area {
+	background-size: 100%;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+.project-sumnail {
+	padding: 10px;
+	border: 1px solid grey;
+	opacity: 1;
+}
+
+.project-item {
+	padding: 10px;
+	border: 1px solid grey;
+	display: inline-block;
+}
+
+.projectlist-h1 {
+	margin: 0;
+	font-family: 'Thasadith', sans-serif;
+	font-size: 40px;
+	margin-top: 3%;
+	margin-bottom: 3%;
+	text-align: center;
+}
+
+.projectlist-wrapper {
+	width: 80%;
+	height: 87%;
+	margin-left: 8%;
+}
+
+.card-img {
+	border-radius: 0%;
+	padding-top: 10px;
+	height: 100px;
+	width: 100%;
+}

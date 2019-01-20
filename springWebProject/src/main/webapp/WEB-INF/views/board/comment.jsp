@@ -115,7 +115,7 @@
 										+ "</strong>"
 										+ "&nbsp&nbsp"
 										+ data[i].regdate
-										+ "<button type='button' class='commentDelete' style='margin-left: 10px; padding:3px 3px;font-size: 12px;' onClick='delete_comment("
+										+ "<button type='button' class='comment-delete' onClick='delete_comment("
 										+ data[i].c_code
 										+ ")'>삭제</button>"
 										+ "</h6>";

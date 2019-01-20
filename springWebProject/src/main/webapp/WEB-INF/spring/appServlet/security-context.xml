@@ -34,6 +34,8 @@
 		<security:intercept-url pattern="/home" access="permitAll" />
 		<security:intercept-url pattern="/admin/**"
 			access='hasRole("ROLE_ADMIN")' />
+		<security:intercept-url pattern="/projects/addProject"
+			access='hasRole("ROLE_ADMIN")' />
 		<security:intercept-url pattern="/board/view"
 			access='hasRole("ROLE_USER") or hasRole("ROLE_ADMIN")' />
 		<security:intercept-url pattern="/board/write"

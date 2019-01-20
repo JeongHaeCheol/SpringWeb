@@ -42,6 +42,7 @@ import my.custom.project.model.Board;
 import my.custom.project.model.Comment;
 import my.custom.project.service.BoardService;
 import my.custom.project.service.CommentService;
+import my.custom.project.util.UploadFileUtils;
 
 @Controller
 @RequestMapping("/board/*")
@@ -52,8 +53,7 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 
-	@Resource(name = "uploadPath")
-	private String uploadPath;
+	private UploadFileUtils uploadFileUtils = new UploadFileUtils();
 
 	@Autowired
 	CommentService commentService;
@@ -123,7 +123,7 @@ public class BoardController {
 
 		if (!imageFile.getOriginalFilename().equals("")) {
 			try {
-				savedName = uploadFile(imageFile.getOriginalFilename(), imageFile.getBytes());
+				savedName = uploadFileUtils.uploadFile(imageFile.getOriginalFilename(), imageFile.getBytes());
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
@@ -139,16 +139,6 @@ public class BoardController {
 		// redirect를 걸어야 컨트롤러를 거치기 때문에 컨트롤러의 수행작업을 다시 수행할 수 있다.
 	}
 
-	private String uploadFile(String originalName, byte[] fileData) throws Exception {
-
-		UUID uid = UUID.randomUUID();
-		String savedName = uid.toString() + "_" + originalName;
-
-		File target = new File(uploadPath, savedName);
-		FileCopyUtils.copy(fileData, target);
-		return savedName;
-
-	}
 
 	// 3. 글 상세내용 조회, 조회수 처리
 	@RequestMapping(value = "view", method = RequestMethod.GET)
@@ -249,7 +239,7 @@ public class BoardController {
 		
 		String savedName = "temp";
 		try {
-			savedName = uploadFile(fileName, imageFile.getBytes());
+			savedName = uploadFileUtils.uploadFile(fileName, imageFile.getBytes());
 			logger.info("2 : " + savedName);
 		} catch (IOException e) {
 			e.printStackTrace();

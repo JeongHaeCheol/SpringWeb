@@ -44,5 +44,13 @@
 	<definition name="board/write" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/board/write.jsp" />
 	</definition>
+	
+	<definition name="projects/projectList" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/projects/projectList.jsp" />
+	</definition>
+	
+	<definition name="projects/addProject" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/projects/addProject.jsp" />
+	</definition>
 
 </tiles-definitions>

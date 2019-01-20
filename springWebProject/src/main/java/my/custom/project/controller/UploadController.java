@@ -34,8 +34,7 @@ public class UploadController {
 
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 
-	@Resource(name = "uploadPath")
-	private String uploadPath;
+	private UploadFileUtils uploadFileUtils = new UploadFileUtils();
 
 	@RequestMapping(value = "/uploadForm", method = RequestMethod.GET)
 	public void uploadForm() throws Exception {
@@ -48,21 +47,11 @@ public class UploadController {
 		logger.info("size: " + file.getSize());
 		logger.info("contentType: " + file.getContentType());
 
-		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
+		String savedName = uploadFileUtils.uploadFile(file.getOriginalFilename(), file.getBytes());
 
 		model.addAttribute("savedName", savedName);
 
 		return "uploadResult";
-
-	}
-
-	private String uploadFile(String originalName, byte[] fileData) throws Exception {
-
-		UUID uid = UUID.randomUUID();
-		String savedName = uid.toString() + "_" + originalName;
-		File target = new File(uploadPath, savedName);
-		FileCopyUtils.copy(fileData, target);
-		return savedName;
 
 	}
 
@@ -74,7 +63,7 @@ public class UploadController {
 		logger.info("originalName: " + file.getOriginalFilename());
 
 		ResponseEntity<String> img_path = new ResponseEntity<>(
-				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
+				uploadFileUtils.uploadFile(file.getOriginalFilename(), file.getBytes()),
 				HttpStatus.CREATED);
 
 		String user_imgPath = (String) img_path.getBody();
@@ -101,9 +90,9 @@ public class UploadController {
 			MediaType mType = MediaUtils.getMediaType(formatName);
 			HttpHeaders headers = new HttpHeaders();
 			
-			logger.info("File Name included path : " + uploadPath+ fileName);
+			logger.info("File Name included path : " + uploadFileUtils.getUploadPath()+ fileName);
 
-			in = new FileInputStream(uploadPath + fileName);
+			in = new FileInputStream(uploadFileUtils.getUploadPath() + fileName);
 
 		
 			
@@ -146,10 +135,10 @@ public class UploadController {
 			
 			String front = fileName.substring(0, 12);
 			String end = fileName.substring(14);
-			new File(uploadPath + (front + end).replace('/', File.separatorChar)).delete();
+			new File(uploadFileUtils.getUploadPath() + (front + end).replace('/', File.separatorChar)).delete();
 		}
 		
-		new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
+		new File(uploadFileUtils.getUploadPath() + fileName.replace('/', File.separatorChar)).delete();
 		
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 		

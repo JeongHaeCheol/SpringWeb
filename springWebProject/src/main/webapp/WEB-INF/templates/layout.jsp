@@ -15,17 +15,20 @@
 <title>Dashboard Template for Bootstrap</title>
 
 <!-- Bootstrap core CSS -->
-<link href="<c:url value ="/resources/css/bootstrap.min.css"/>"
+<link href="<c:url value ='/resources/css/bootstrap.min.css'/>"
 	rel="stylesheet">
 
 
-<link href="<c:url value="/resources/css/dashboard.css"/>"
+<link href="<c:url value='/resources/css/dashboard.css'/>"
 	rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="<c:url value="/resources/css/mycustom.css?ver=1"/>"
+<link href="<c:url value='/resources/css/mycustom.css?ver=1'/>"
 	rel="stylesheet">
 	
+<link href="<c:url value='/resources/css/projects_style.css?ver=1'/>"
+	rel="stylesheet">
+
 
 
 

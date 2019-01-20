@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 
 import org.imgscalr.Scalr;
@@ -16,8 +17,29 @@ import org.springframework.util.FileCopyUtils;
 public class UploadFileUtils {
 
 	private static final Logger logger = LoggerFactory.getLogger(UploadFileUtils.class);
+	
 
-	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception {
+	private String uploadPath = "C:\\Users\\irvin\\Desktop\\eclipse workspace\\springWebProject\\src\\main\\webapp\\resources\\profileImage";
+	
+	public String getUploadPath() {
+		return uploadPath;
+	}
+	
+	public String uploadFile(String originalName, byte[] fileData) throws Exception {
+
+		UUID uid = UUID.randomUUID();
+		String savedName = uid.toString() + "_" + originalName;
+		
+		logger.info(uploadPath);
+
+		File target = new File(uploadPath, savedName);
+		FileCopyUtils.copy(fileData, target);
+		return savedName;
+
+	}
+
+
+	public static String uploadFile2(String uploadPath, String originalName, byte[] fileData) throws Exception {
 
 		UUID uid = UUID.randomUUID();
 
