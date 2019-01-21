@@ -18,7 +18,10 @@
 			method="post" modelAttribute="board"  enctype="multipart/form-data">
 
 
-			<sf:input type="hidden" path="bno" id="bno" style="width:60%;"
+			<sf:input type="hidden" path="bno" id="bno" 
+				class="form-control" />
+				
+			<sf:input type="hidden" path="writer" id="wrtier" 
 				class="form-control" />
 
 			<div class="form-group">
@@ -56,17 +59,17 @@
 
 			<div style="clear:left;">
 				<c:choose>
-					<c:when test="${board.imageFilename == 'temp'}">
+					<c:when test="${board.imageFileName == 'temp'}">
 						<div>
 							<img id="uploadImg"
-								src="/springWebProject/displayFile?fileName=/tempImg.gif"
+								src="/springWebProject/displayFile?fileName=tempImg.gif&sel=0"
 								style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div>
 							<img id="uploadImg"
-								src="/springWebProject/displayFile?fileName=/${board.imageFilename}"
+								src="/springWebProject/displayFile?fileName=${board.imageFileName}&sel=0"
 								style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
 						</div>
 					</c:otherwise>

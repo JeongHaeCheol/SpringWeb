@@ -57,14 +57,14 @@
 					<c:when test="${empty imageFile}">
 						<div>
 							<img id="uploadImg"
-								src="/springWebProject/displayFile?fileName=/tempImg.gif"
+								src="/springWebProject/displayFile?fileName=tempImg.gif&sel=0"
 								style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div>
 							<img id="uploadImg"
-								src="/springWebProject/displayFile?fileName=${imageFile}"
+								src="/springWebProject/displayFile?fileName=${imageFile}&sel=0"
 								style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
 						</div>
 					</c:otherwise>

@@ -40,15 +40,15 @@ public class ProjectsListController {
 		List<Project> projectList = projectService.getProjects();
 		model.addAttribute("projectList", projectList);
 
-		return "projects/projectList";
+		return "projects/list";
 	}
 
-	@RequestMapping(value = "addProject", method = RequestMethod.GET)
+	@RequestMapping(value = "add", method = RequestMethod.GET)
 	public String addProject(Project project, Model model) {
-		return "projects/addProject";
+		return "projects/add";
 	}
 
-	@RequestMapping(value = "addProject", method = RequestMethod.POST)
+	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public String addProjectPost(@Valid Project project, MultipartHttpServletRequest mtfRequest,
 			@RequestParam("imageFiles") MultipartFile[] file) {
 
@@ -57,15 +57,17 @@ public class ProjectsListController {
 		project.setWriter(name);
 
 		String saveFilenames = "";
+		String sumnailFileName = "";
 
 		for (MultipartFile imageFile : file) {
-			String savedName = "temp";
-			logger.info("for문 진입 ");
+			String savedName = "";
 
 			if (!imageFile.getOriginalFilename().equals("")) {
 				try {
-					savedName = uploadFileUtils.uploadFile(imageFile.getOriginalFilename(), imageFile.getBytes());
-					logger.info("for문  savedName : " + savedName);
+					savedName = uploadFileUtils.uploadFile(1, imageFile.getOriginalFilename(), imageFile.getBytes());
+					if(sumnailFileName.equals("")) {
+						sumnailFileName = savedName;
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (Exception e) {
@@ -75,35 +77,11 @@ public class ProjectsListController {
 			}
 
 		}
-
-		/*
-		 * Iterator<String> fileNames = mtfRequest.getFileNames(); String saveFilenames
-		 * = "";
-		 * 
-		 * 
-		 * while (fileNames.hasNext()) {
-		 * 
-		 * 
-		 * 
-		 * String imageFilenames = fileNames.next(); MultipartFile imageFile =
-		 * mtfRequest.getFile(imageFilenames);
-		 * 
-		 * User user = (User)
-		 * SecurityContextHolder.getContext().getAuthentication().getPrincipal(); String
-		 * name = user.getUsername(); project.setWriter(name);
-		 * 
-		 * String savedName = "temp"; logger.info("for문 진입 "); if
-		 * (!imageFilenames.equals("")) { try { savedName =
-		 * uploadFileUtils.uploadFile(imageFile.getOriginalFilename(),
-		 * imageFile.getBytes()); logger.info("for문  savedName : " + savedName); } catch
-		 * (IOException e) { e.printStackTrace(); } catch (Exception e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); } } saveFilenames += ";" +
-		 * savedName; }
-		 */
-		project.setImageFilenames(saveFilenames);
+		project.setSumnailFileName(sumnailFileName);
+		project.setImageFileNames(saveFilenames);
 
 		projectService.create(project);
 
-		return "projects/projectList";
+		return "redirect:list";
 	}
 }

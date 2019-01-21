@@ -43,7 +43,7 @@ public class Board {
 	
 	private int groupLayer;
 	
-	private String imageFilename;
+	private String imageFileName;
 	
 	
 	private String writer;

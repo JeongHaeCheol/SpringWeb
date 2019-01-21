@@ -36,7 +36,8 @@ public class Project {
 	@NotEmpty(message="내용을 입력해주세요")
 	private String content;
 	
-	private String imageFilenames;
+	private String imageFileNames;
+	private String sumnailFileName;
 	
 	private String writer;
 	private Date regdate;

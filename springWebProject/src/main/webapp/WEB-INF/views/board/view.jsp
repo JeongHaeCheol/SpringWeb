@@ -53,22 +53,11 @@
 
 
 		<div>
-				<c:choose>
-				<c:when test="${empty board.imageFilename}">
-					<div>
-						<img id="uploadedImg"
-							src="/springWebProject/displayFile?fileName=/tempImg.gif"
-							style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div>
-						<img id="uploadedImg"
-							src="/springWebProject/displayFile?fileName=/${board.imageFilename}"
-							style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
-					</div>
-				</c:otherwise>
-			</c:choose>
+			<c:if test="${not empty board.imageFileName}">
+				<img id="uploadedImg"
+					src="/springWebProject/displayFile?fileName=${board.imageFileName}&sel=0"
+					style="border-radius: 0%; padding-top: 10px; height: 100px; width: 100px;">
+			</c:if>
 		</div>
 
 

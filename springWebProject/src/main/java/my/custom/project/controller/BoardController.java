@@ -119,11 +119,11 @@ public class BoardController {
 		MultipartFile imageFile = board.getImageFile();
 
 
-		String savedName = "temp";
+		String savedName = "";
 
 		if (!imageFile.getOriginalFilename().equals("")) {
 			try {
-				savedName = uploadFileUtils.uploadFile(imageFile.getOriginalFilename(), imageFile.getBytes());
+				savedName = uploadFileUtils.uploadFile(0, imageFile.getOriginalFilename(), imageFile.getBytes());
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
@@ -131,7 +131,7 @@ public class BoardController {
 				e.printStackTrace();
 			}
 		}
-		board.setImageFilename(savedName);
+		board.setImageFileName(savedName);
 
 		boardService.create(board);
 
@@ -212,6 +212,7 @@ public class BoardController {
 		String name = user.getUsername();
 
 		if (!name.equals(board.getWriter())) {
+			logger.info("Not Permmision");
 			return "redirect:list";
 		}
 
@@ -230,28 +231,26 @@ public class BoardController {
 
 		MultipartFile imageFile = board.getImageFile();
 
+
 		String tempName = board.getImageFile().getOriginalFilename();
 		String[] array = tempName.split("\\\\");
 
 		String fileName = array[array.length - 1];
-		
-		logger.info("1 : " + fileName);
-		
-		String savedName = "temp";
+	
+		String savedName = "";
 		try {
-			savedName = uploadFileUtils.uploadFile(fileName, imageFile.getBytes());
-			logger.info("2 : " + savedName);
+			savedName = uploadFileUtils.uploadFile(0, fileName, imageFile.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		board.setImageFilename(savedName);
+		board.setImageFileName(savedName);
 		
 		boardService.update(board);
 		
-		logger.info(board.getImageFilename());
+		
 		return "redirect:view?bno=" + board.getBno();
 	}
 

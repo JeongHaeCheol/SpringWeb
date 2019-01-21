@@ -81,7 +81,7 @@ public class BoardService {
 		originBoard.setContent(board.getContent());
 		
 		
-		String filePath = uploadFileUtils.getUploadPath() + "\\" + originBoard.getImageFilename();
+		String filePath = uploadFileUtils.getUploadPath(0) + "\\" + originBoard.getImageFileName();
 
 		File file = new File(filePath);
 
@@ -90,16 +90,16 @@ public class BoardService {
 			boolean result = file.delete();
 
 			if (result) {
-				logger.info(originBoard.getImageFilename() + " File Delete Success"); // 성공
+				logger.info(originBoard.getImageFileName() + " File Delete Success"); // 성공
 			} else {
-				logger.info(originBoard.getImageFilename() + " File Delete Fail"); // 실패
+				logger.info(originBoard.getImageFileName() + " File Delete Fail"); // 실패
 			}
 		} else {
-			logger.info(originBoard.getImageFilename() + " File Not Found"); // 미존재
+			logger.info(originBoard.getImageFileName() + " File Not Found"); // 미존재
 		}
 
 		
-		originBoard.setImageFilename(board.getImageFilename());
+		originBoard.setImageFileName(board.getImageFileName());
 		convertToHTML(originBoard);
 
 		boardDao.update(originBoard);

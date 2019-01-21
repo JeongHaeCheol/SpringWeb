@@ -45,12 +45,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/board/write.jsp" />
 	</definition>
 	
-	<definition name="projects/projectList" extends="base">
-		<put-attribute name="body" value="/WEB-INF/views/projects/projectList.jsp" />
+	<definition name="projects/list" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/projects/list.jsp" />
 	</definition>
 	
-	<definition name="projects/addProject" extends="base">
-		<put-attribute name="body" value="/WEB-INF/views/projects/addProject.jsp" />
+	<definition name="projects/add" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/projects/add.jsp" />
 	</definition>
 
 </tiles-definitions>
