@@ -22,6 +22,11 @@ public class ProjectService {
 	public List<Project> getProjects() {
 		return projectDao.getProjects();
 	}
+	
+	public Project getProject(int projectNo) {
+		return projectDao.getProject(projectNo);
+	}
+
 
 	public void create(Project project) {
 		convertToHTML(project);
@@ -43,5 +48,6 @@ public class ProjectService {
 		Project.setTitle(title);
 		Project.setContent(content);
 	}
+
 
 }

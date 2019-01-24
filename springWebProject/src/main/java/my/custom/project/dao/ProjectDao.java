@@ -31,6 +31,14 @@ public class ProjectDao {
 		List<Project> projectList = session.createQuery("from Project order by projectNo DESC,  regdate DESC").list();
 		return projectList;
 	}
+	
+
+	public Project getProject(int projectNo) {
+		Session session = sessionFactory.getCurrentSession();
+		Project project = session.get(Project.class, projectNo);
+		return project;
+	}
+
 
 
 	public void create(Project project) {
@@ -38,5 +46,6 @@ public class ProjectDao {
 		session.saveOrUpdate(project);
 		session.flush();
 	}
+
 
 }

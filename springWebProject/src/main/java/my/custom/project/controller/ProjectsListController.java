@@ -1,9 +1,12 @@
 package my.custom.project.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -34,6 +37,9 @@ public class ProjectsListController {
 
 	private UploadFileUtils uploadFileUtils = new UploadFileUtils();
 
+	
+	
+	
 	@RequestMapping("list")
 	public String getProjectList(Model model) {
 
@@ -41,6 +47,27 @@ public class ProjectsListController {
 		model.addAttribute("projectList", projectList);
 
 		return "projects/list";
+	}
+	
+	@RequestMapping("view")
+	public String viewProject(@RequestParam int projectNo, Model model) {
+		Project project = projectService.getProject(projectNo);
+		
+		String[] fileNameArr =  project.getImageFileNames().substring(1).split(";");
+		
+	
+		List<String> fileNameList = Arrays.asList(fileNameArr);
+		
+		for(String fileName : fileNameList) {
+			logger.info("project fileNames : " + fileName);
+		}
+		logger.info("project fileListSize : " + fileNameList.size());
+		model.addAttribute("project", project);
+		model.addAttribute("fileListSize", fileNameList.size());
+		model.addAttribute("fileNameList", fileNameList);
+		
+		
+		return "projects/view";
 	}
 
 	@RequestMapping(value = "add", method = RequestMethod.GET)

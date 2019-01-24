@@ -59,7 +59,7 @@
 
 			<div style="clear:left;">
 				<c:choose>
-					<c:when test="${board.imageFileName == 'temp'}">
+					<c:when test="${board.imageFileName == ''}">
 						<div>
 							<img id="uploadImg"
 								src="/springWebProject/displayFile?fileName=tempImg.gif&sel=0"

@@ -55,7 +55,7 @@
 
 <body id="containerId">
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row main-body">
 
 
 			<tiles:insertAttribute name="body" />

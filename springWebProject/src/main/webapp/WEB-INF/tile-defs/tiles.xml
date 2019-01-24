@@ -26,9 +26,10 @@
 	</definition>
 
 	<definition name="registerUserSuccess" extends="base">
-		<put-attribute name="body" value="/WEB-INF/views/registerUserSuccess.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/registerUserSuccess.jsp" />
 	</definition>
-	
+
 	<definition name="board/list" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/board/list.jsp" />
 	</definition>
@@ -44,13 +45,17 @@
 	<definition name="board/write" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/board/write.jsp" />
 	</definition>
-	
+
 	<definition name="projects/list" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/projects/list.jsp" />
 	</definition>
-	
+
 	<definition name="projects/add" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/projects/add.jsp" />
+	</definition>
+
+	<definition name="projects/view" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/projects/view.jsp" />
 	</definition>
 
 </tiles-definitions>
