@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Dashboard Template for Bootstrap</title>
+<title>HaeCheol's Web</title>
 
 <!-- Bootstrap core CSS -->
 <link href="<c:url value ='/resources/css/bootstrap.min.css'/>"

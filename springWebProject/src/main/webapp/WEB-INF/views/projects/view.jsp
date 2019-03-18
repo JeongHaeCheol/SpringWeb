@@ -7,27 +7,61 @@
 
 
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+<main role="main" class="main col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"
+	style="height:80%; width:70%;">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
->
-	<ol class="carousel-indicators">
-		<c:forEach  begin="0" end="${fileListSize}" step="1" varStatus="status">
-			<li data-target="#myCarousel" data-slide-to="${status.index}" class="active"></li>
-		</c:forEach>
-	</ol>
+	<c:if test="${fileListSize >= 0}">
+		<ol class="carousel-indicators">
 
-	<div class="carousel-inner"
-		style="height: 50%; background-color: #777;">
-		<c:forEach var="fileName" items="${fileNameList}" varStatus="status">
+			<c:forEach begin="1" end="${fileListSize}" step="1"
+				varStatus="status">
 
-			<div class="carousel-item active">
-				<img src="/springWebProject/displayFile?fileName=${fileName}&sel=1"
-					class="project-img">
-			</div>
+				<c:choose>
+					<c:when test="${status.index == 0}">
+						<li data-target="#myCarousel" data-slide-to="${status.index}"
+							class="active"></li>
+					</c:when>
+					<c:otherwise>
+						<li data-target="#myCarousel" data-slide-to="${status.index}"></li>
+					</c:otherwise>
+				</c:choose>
 
-		</c:forEach>
-	</div>
+			</c:forEach>
 
+		</ol>
+
+		<div class="carousel-inner"
+			style="height: 50%; background-color: #777;">
+
+
+
+			<c:forEach var="fileName" items="${fileNameList}" varStatus="status">
+
+				<c:choose>
+					<c:when test="${status.index == 0}">
+						<div class="carousel-item active">
+
+							<img
+								src="/springWebProject/displayFile?fileName=${fileName}&sel=1"
+								class="project-img">
+
+						</div>
+					</c:when>
+
+					<c:otherwise>
+						<div class="carousel-item">
+
+							<img
+								src="/springWebProject/displayFile?fileName=${fileName}&sel=1"
+								class="project-img">
+
+						</div>
+					</c:otherwise>
+
+				</c:choose>
+			</c:forEach>
+		</div>
+	</c:if>
 
 	<a class="carousel-control-prev" href="#myCarousel" role="button"
 		data-slide="prev"> <span class="carousel-control-prev-icon"
@@ -46,23 +80,9 @@
 
 	<!-- Three columns of text below the carousel -->
 	<div class="row">
-		<div class="col-lg-4">
-			<svg class="bd-placeholder-img rounded-circle" width="140"
-				height="140" xmlns="http://www.w3.org/2000/svg"
-				preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
-				aria-label="Placeholder: 140x140">
-			<title>Placeholder</title>
-			<rect fill="#777" width="100%" height="100%" /> <text fill="#777"
-				dy=".3em" x="50%" y="50%">140x140</text></svg>
-			<h2>Heading</h2>
-			<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis
-				euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
-				Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-				Praesent commodo cursus magna.</p>
-			<p>
-				<a class="btn btn-secondary" href="#" role="button">View details
-					&raquo;</a>
-			</p>
+		<div class="col-lg-10">
+			<h2>${project.title}</h2>
+			<p>${project.content}</p>
 		</div>
 		<!-- /.col-lg-4 -->
 
@@ -76,14 +96,8 @@
 
 	<div class="row featurette">
 		<div class="col-md-7">
-			<h2 class="featurette-heading">
-				First featurette heading. <span class="text-muted">It’ll blow
-					your mind.</span>
-			</h2>
-			<p class="lead">Donec ullamcorper nulla non metus auctor
-				fringilla. Vestibulum id ligula porta felis euismod semper. Praesent
-				commodo cursus magna, vel scelerisque nisl consectetur. Fusce
-				dapibus, tellus ac cursus commodo.</p>
+			<h2 class="featurette-heading">개발환경 및 기술</h2>
+			<p class="lead">${project.envOrTech}
 		</div>
 		<div class="col-md-5">
 			<svg
@@ -99,7 +113,7 @@
 
 	<hr class="featurette-divider">
 
-	<div class="row featurette">
+	<!-- <div class="row featurette">
 		<div class="col-md-7 order-md-2">
 			<h2 class="featurette-heading">
 				Oh yeah, it’s that good. <span class="text-muted">See for
@@ -148,7 +162,7 @@
 
 	<hr class="featurette-divider">
 
-	<!-- /END THE FEATURETTES -->
+	/END THE FEATURETTES -->
 
 </div>
 <!-- /.container --> </main>

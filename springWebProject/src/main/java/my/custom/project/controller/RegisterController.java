@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ import my.custom.project.service.UserService;
 @Controller
 public class RegisterController {
 	
+	
+	private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
+	
 	@Autowired
 	private UserService userService;
 	
@@ -31,6 +36,10 @@ public class RegisterController {
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public String registerUserPost(@Valid User user , BindingResult result, Model model){
+		
+		logger.info("test : "+ user.getPassword());
+		
+		
 		if(result.hasErrors()){
 			return "registerUser";
 		}

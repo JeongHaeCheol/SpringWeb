@@ -8,7 +8,7 @@
 	rel="stylesheet">
 </head>
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+<main role="main" class="main col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 <div class="container-wrapper">
 	<div class="container">
 		<h1>글쓰기</h1>
@@ -73,7 +73,7 @@
 
 
 
-			<sf:button type="submit" class="btn btn-primary">완료</sf:button>
+			<sf:button type="submit" class="btn btn-primary" style="margin-top: 10px;">완료</sf:button>
 			<a href="<c:url value="/board/list"/>" class="btn btn-primary">취소</a>
 
 

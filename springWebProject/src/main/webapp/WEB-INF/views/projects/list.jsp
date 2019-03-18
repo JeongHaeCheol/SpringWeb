@@ -19,7 +19,7 @@
 	</div>
 </c:if>
 
-<div class="album py-5 bg-light">
+<div class="album py-5 bg-light" style="margin-top:90px;">
 	<div class="container">
 		<div class="row">
 			<c:forEach var="project" items="${projectList}">
@@ -37,8 +37,9 @@
 									<a href="<c:url value="/projects/view?projectNo=${project.projectNo}"/>" 
 									class="btn btn0sm btn-outline-secondary">View</a>
 									<c:if
-										test="${pageContext.request.userPrincipal.name != '${project.writer}'}">
-										<button type="button" class="btn btn0sm btn-outline-secondary">Edit</button>
+										test="${pageContext.request.userPrincipal.name == project.writer}">
+										<a href="<c:url value="/projects/update?projectNo=${project.projectNo}"/>" 
+									class="btn btn0sm btn-outline-secondary">Edit</a>
 									</c:if>
 								</div>
 							</div>

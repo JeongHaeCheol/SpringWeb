@@ -35,6 +35,9 @@ public class Project {
 	
 	@NotEmpty(message="내용을 입력해주세요")
 	private String content;
+
+	@NotEmpty(message="환경 및 기술을 입력해주세요")
+	private String envOrTech;
 	
 	private String imageFileNames;
 	private String sumnailFileName;

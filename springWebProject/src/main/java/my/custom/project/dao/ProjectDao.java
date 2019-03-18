@@ -48,4 +48,11 @@ public class ProjectDao {
 	}
 
 
+	public void update(Project project) {
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(project);
+		session.flush();
+	}
+
+
 }

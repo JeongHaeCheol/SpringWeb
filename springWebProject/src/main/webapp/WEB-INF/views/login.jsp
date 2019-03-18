@@ -6,7 +6,7 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 <div class="container-wrapper">
 	<div class="container">
-		<h2>Login with username and password</h2>
+		<h2>Login with ID and Password</h2>
 		<c:if test="${not empty errorMsg}">
 			<div style="color: #ff0000">
 				<h3>${errorMsg}</h3>
@@ -22,7 +22,7 @@
 		<sf:form action="${pageContext.request.contextPath}/login"
 			method="post" modelAttribute="user">
 			<div class="form-group">
-				<label for="username">Username:</label>
+				<label for="username">ID:</label>
 				<sf:input class="form-control" id="username" path="username"
 					style="width: 50%" />
 			</div>
@@ -33,14 +33,10 @@
 					style="width: 50%" />
 			</div>
 
-			<!-- spring form 사용시 자동으로 csrf 처리함 -->
-
-			<%-- 		<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
- --%>
 
 			<sf:button type="submit" class="btn btn-primary">로그인</sf:button>
 			<a href="<c:url value="/register"/>" class="btn btn-primary">회원가입</a>
+			<a href="<c:url value="/userHelp/findPassword"/>" class="btn btn-primary">비밀번호 찾기</a>
 		</sf:form>
 
 	</div>

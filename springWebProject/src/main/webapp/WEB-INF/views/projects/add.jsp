@@ -8,7 +8,7 @@
 	rel="stylesheet">
 </head>
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+<main role="main" class="main col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 <div class="container-wrapper">
 	<div class="container">
 		<h1>프로젝트 추가</h1>
@@ -22,16 +22,21 @@
 				<sf:errors path="title" cssStyle="color:#ff0000;" />
 				<sf:input path="title" id="title" style="width:60%;"
 					class="form-control" />
-
 			</div>
-
+			
+				<div class="form-group">
+				<label for="envOrTech">개발환경 및 기술</label>
+				<sf:errors path="envOrTech" cssStyle="color:#ff0000;" />
+				<sf:textarea path="envOrTech" id="envOrTech" cols="30" row="5"
+					style="width:60%; height: 90px;" class="form-control" />
+			</div>
+			
+			
 			<div class="form-group">
-				<label for="content">내용</label>
+				<label for="content">프로젝트 설명</label>
 				<sf:errors path="content" cssStyle="color:#ff0000;" />
 				<sf:textarea path="content" id="content" cols="40" row="60"
 					style="width:60%; height:260px;" class="form-control" />
-
-
 			</div>
 
 
@@ -56,7 +61,7 @@
 			</div>
 
 
-			<sf:button type="submit" class="btn btn-primary">완료</sf:button>
+			<sf:button type="submit" class="btn btn-primary" style="margin-top: 10px;">완료</sf:button>
 			<a href="<c:url value="/projects/list"/>"
 				class="btn btn-primary">취소</a>
 

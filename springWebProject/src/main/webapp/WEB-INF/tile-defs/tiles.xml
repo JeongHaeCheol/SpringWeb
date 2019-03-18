@@ -10,8 +10,9 @@
 		<put-attribute name="title" value="HaeCheol's Web" />
 		<put-attribute name="header" value="/WEB-INF/templates/header.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/templates/menu.jsp" />
-
 	</definition>
+
+
 
 	<definition name="home" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
@@ -29,6 +30,22 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/registerUserSuccess.jsp" />
 	</definition>
+
+	<definition name="user/findPassword" extends="base">
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/findPassword.jsp" />
+	</definition>
+
+	<definition name="user/findPwSuccess" extends="base">
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/findPwSuccess.jsp" />
+	</definition>
+
+	<definition name="user/findIdFail" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/user/findIdFail.jsp" />
+	</definition>
+
+
 
 	<definition name="board/list" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/board/list.jsp" />
@@ -52,6 +69,10 @@
 
 	<definition name="projects/add" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/projects/add.jsp" />
+	</definition>
+
+	<definition name="projects/update" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/projects/update.jsp" />
 	</definition>
 
 	<definition name="projects/view" extends="base">

@@ -1,89 +1,121 @@
-.comment-update{
+.comment-update {
 	margin-left: 10px;
-	padding:3px 3px;
+	padding: 3px 3px;
 	font-size: 12px;
 }
 
-.comment-delete{
+.comment-delete {
 	margin-left: 10px;
-	padding:3px 3px;
+	padding: 3px 3px;
 	font-size: 12px;
 }
 
-.main-body{
+.main-body {
 	margin-top: 6%;
 }
 
-.myButton{
+
+.main {
+	margin-bottom: 10%;
+}
+
+.myButton {
 	margin: 10px 10px 10px 10px;
 }
 
-.button-1{
-  margin-right: 10px;
-  width:120px;
-  height:40px;
-  border:2px solid #34495e;
-  float:left;
-  text-align:center;
-  cursor:pointer;
-  position:relative;
-  box-sizing:border-box;
-  overflow:hidden;
-  
-}
-.button-1 a{
-  font-family:arial;
-  font-size:16px;
-  color:#34495e;
-  text-decoration:none;
-  line-height:50px;
-  transition:all .5s ease;
-  z-index:2;
-  position:relative;
+.button-1 {
+	margin-right: 10px;
+	width: 120px;
+	height: 40px;
+	border: 2px solid #34495e;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+	position: relative;
+	box-sizing: border-box;
+	overflow: hidden;
 }
 
+.button-1 a {
+	font-family: arial;
+	font-size: 16px;
+	color: #34495e;
+	text-decoration: none;
+	line-height: 50px;
+	transition: all .5s ease;
+	z-index: 2;
+	position: relative;
+}
 
 table.type08 {
-    border-collapse: collapse;
-    text-align: left;
-    line-height: 1.5;
-    border-left: 1px solid #ccc;
-    margin: 20px 10px;
+	border-collapse: collapse;
+	text-align: left;
+	line-height: 1.5;
+	border-left: 1px solid #ccc;
+	margin: 20px 10px;
 }
 
 table.type08 thead th {
-    padding: 10px;
-    font-weight: bold;
-    border-top: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    border-bottom: 2px solid #c00;
-    background: #dcdcd1;
+	padding: 10px;
+	font-weight: bold;
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-bottom: 2px solid #c00;
+	background: #dcdcd1;
 }
+
 table.type08 tbody th {
-    width: 150px;
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    background: #ececec;
+	width: 150px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	background: #ececec;
 }
+
 table.type08 td {
-    width: 350px;
-    padding: 10px;
-    vertical-align: top;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+	width: 350px;
+	padding: 10px;
+	vertical-align: top;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
 }
 
+.board_view {
+	width: 50%;
+	border-top: 2px solid #252525;
+	border-bottom: 1px solid #ccc
+}
 
+.board_view tbody th {
+	text-align: left;
+	background: #f7f7f7;
+	color: #3b3a3a
+}
 
-.board_view {width:50%;border-top:2px solid #252525;border-bottom:1px solid #ccc}
-.board_view tbody th {text-align:left;background:#f7f7f7;color:#3b3a3a}
-.board_view tbody th.list_tit {font-size:13px;color:#000;letter-spacing:0.1px}
-.board_view tbody .no_line_b th, .board_view tbody .no_line_b td {border-bottom:none}
-.board_view tbody th, .board_view tbody td {padding:15px 0 16px 16px;border-bottom:1px solid #ccc}
-.board_view tbody td.view_text {border-top:1px solid #ccc; border-bottom:1px solid #ccc;padding:45px 18px 45px 18px}
-.board_view tbody th.th_file {padding:0 0 0 15px; vertical-align:middle}
+.board_view tbody th.list_tit {
+	font-size: 13px;
+	color: #000;
+	letter-spacing: 0.1px
+}
 
+.board_view tbody .no_line_b th, .board_view tbody .no_line_b td {
+	border-bottom: none
+}
 
+.board_view tbody th, .board_view tbody td {
+	padding: 15px 0 16px 16px;
+	border-bottom: 1px solid #ccc
+}
+
+.board_view tbody td.view_text {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding: 45px 18px 45px 18px
+}
+
+.board_view tbody th.th_file {
+	padding: 0 0 0 15px;
+	vertical-align: middle
+}
