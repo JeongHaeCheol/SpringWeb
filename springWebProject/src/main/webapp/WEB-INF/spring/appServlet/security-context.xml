@@ -9,8 +9,8 @@
 		autowire-candidate="false" />
 
 
-	<bean id="bcryptEncoder"
-		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+<!-- 	<bean id="bcryptEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" /> -->
 
 
 
@@ -20,7 +20,7 @@
 				data-source-ref="dataSource"
 				users-by-username-query="select username, password, enabled from users where username=?"
 				authorities-by-username-query="select username, authority  from users where username=?" />
-			<security:password-encoder ref="bcryptEncoder"></security:password-encoder>
+			<!-- <security:password-encoder ref="bcryptEncoder"></security:password-encoder> -->
 
 		</security:authentication-provider>
 

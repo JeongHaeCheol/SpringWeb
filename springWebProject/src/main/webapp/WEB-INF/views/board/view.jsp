@@ -49,7 +49,7 @@
 
 
 
-		<div style="border: 1px solid; padding: 10px; width: 500px;">${board.content}</div>
+		<div style=" margin-top:20px; border:1px gray solid; padding: 10px; width: 500px;">${board.content}</div>
 
 
 		<div>

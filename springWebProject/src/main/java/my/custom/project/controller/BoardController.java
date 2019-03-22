@@ -238,13 +238,9 @@ public class BoardController {
 		String fileName = array[array.length - 1];
 	
 		String savedName = "";
-		try {
+		
+		if(!fileName.equals("")) {	
 			savedName = uploadFileUtils.uploadFile(0, fileName, imageFile.getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		board.setImageFileName(savedName);
 		

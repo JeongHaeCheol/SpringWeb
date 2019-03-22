@@ -52,7 +52,7 @@
 				</div>
 			</div>
 
-			<div style="clear: left;">
+			<div style="clear: left; margin-bottom: 10px;">
 				<c:choose>
 					<c:when test="${empty imageFile}">
 						<div>
@@ -73,7 +73,7 @@
 
 
 
-			<sf:button type="submit" class="btn btn-primary" style="margin-top: 10px;">완료</sf:button>
+			<sf:button type="submit" class="btn btn-primary">완료</sf:button>
 			<a href="<c:url value="/board/list"/>" class="btn btn-primary">취소</a>
 
 

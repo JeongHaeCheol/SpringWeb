@@ -59,7 +59,7 @@ $(function() {
 
 			<h3>기본정보</h3>
 			<div class="form-group">
-				<label for="username">ID</label> <span style="color: #ff0000">${usernameMsg}</span>
+				<label for="username">ID</label> 
 				<sf:input path="username" id="username" class="form-control" />
 				<sf:errors path="username" cssStyle="color : #ff0000" />
 			</div>

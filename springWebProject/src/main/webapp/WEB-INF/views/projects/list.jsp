@@ -25,7 +25,7 @@
 			<c:forEach var="project" items="${projectList}">
 				<div class="col-md-3">
 
-					<div class="card mb-3 shadow-sm">
+					<div class="card mb-3 shadow-sm"  style="height:250px; width:180px;">
 						<img
 							src="/springWebProject/displayFile?fileName=${project.sumnailFileName}&sel=1"
 							class="card-img">

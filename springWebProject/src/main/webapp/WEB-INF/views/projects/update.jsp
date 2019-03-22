@@ -65,10 +65,10 @@
 
 
 
-			<div id="imagesDiv" class="imagesDiv" style="clear: left;"></div>
+			<div id="imagesDiv" class="imagesDiv" style="clear: left; margin-bottom: 10px;"></div>
 
 
-			<sf:button type="submit" class="btn btn-primary" style="margin-top: 10px;">완료</sf:button>
+			<sf:button type="submit" class="btn btn-primary">완료</sf:button>
 			<a href="<c:url value="/projects/list"/>" class="btn btn-primary">취소</a>
 
 		</sf:form>

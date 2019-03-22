@@ -21,12 +21,12 @@ public class UserDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	/*@Autowired
+	private PasswordEncoder passwordEncoder;*/
 
 	public void addUser(User user) {
 		Session session = sessionFactory.getCurrentSession();
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		/*user.setPassword(passwordEncoder.encode(user.getPassword()));*/
 		session.saveOrUpdate(user);
 		session.flush();
 
