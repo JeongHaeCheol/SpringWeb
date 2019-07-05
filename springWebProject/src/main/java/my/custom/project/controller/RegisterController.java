@@ -37,9 +37,6 @@ public class RegisterController {
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public String registerUserPost(@Valid User user , BindingResult result, Model model){
 		
-		logger.info("test : "+ user.getPassword());
-		
-		
 		if(result.hasErrors()){
 			return "registerUser";
 		}

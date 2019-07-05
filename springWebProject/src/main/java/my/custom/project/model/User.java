@@ -28,17 +28,17 @@ public class User {
 	private int id;
 	
 	
-	/*@Size(min=5, max=12, message="사용자 아이디는 5자리 이상 12자 이하만 가능 합니다.")
-	@Pattern(regexp="^[0-9a-zA-Z]*$" , message="사용자 아이디는 영문자 숫자 조합만 가능 합니다.")*/
+	@Size(min=5, max=12, message="사용자 아이디는 5자리 이상 12자 이하만 가능 합니다.")
+	@Pattern(regexp="^[0-9a-zA-Z]*$" , message="사용자 아이디는 영문자 숫자 조합만 가능 합니다.")
 	@NotEmpty(message="Must not be null")
 	private String username;
 	
-/*	@Pattern(regexp="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$" , message="최소 8자리에 숫자, 문자, 특수문자 각각 1개 이상 포함")*/
+	@Pattern(regexp="^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&./])[A-Za-z0-9$@$!%*#?&./]{5,20}$" , message="최소 5자 최대 20자 숫자, 문자, 특수문자 각각 1개 이상 포함")
 	@NotEmpty(message="Must not be null")
 	private String password;
 	
 	
-	/*@Pattern(regexp="^[a-z0-9_+.-]+@([a-z0-9-]+\\.)+[a-z0-9]{2,4}$")*/
+	@Pattern(regexp="^[a-z0-9_+.-]+@([a-z0-9-]+\\.)+[a-z0-9]{2,4}$")
 	@NotEmpty(message="Must not be null")
 	private String email;
 

@@ -9,8 +9,8 @@
 		autowire-candidate="false" />
 
 
-<!-- 	<bean id="bcryptEncoder"
-		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" /> -->
+	<bean id="bcryptEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
 
 

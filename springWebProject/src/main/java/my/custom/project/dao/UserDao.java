@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -18,11 +20,14 @@ import my.custom.project.model.User;
 @Transactional
 public class UserDao {
 
+	
+	private static final Logger logger = LoggerFactory.getLogger(UserDao.class);
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	/*@Autowired
-	private PasswordEncoder passwordEncoder;*/
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public void addUser(User user) {
 		Session session = sessionFactory.getCurrentSession();
