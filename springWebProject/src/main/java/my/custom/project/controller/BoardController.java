@@ -132,6 +132,7 @@ public class BoardController {
 			}
 		}
 		board.setImageFileName(savedName);
+		board.setRegdate(new Date());
 
 		boardService.create(board);
 
@@ -243,6 +244,7 @@ public class BoardController {
 			savedName = uploadFileUtils.uploadFile(0, fileName, imageFile.getBytes());
 		}
 		board.setImageFileName(savedName);
+		board.setRegdate(new Date());
 		
 		boardService.update(board);
 		
@@ -309,8 +311,9 @@ public class BoardController {
 			cmt.setWriter(name);
 			cmt.setB_code(b_code);
 			cmt.setComment(comment);
+			cmt.setRegdate(new Date());
 			commentService.create(cmt);
-
+          
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

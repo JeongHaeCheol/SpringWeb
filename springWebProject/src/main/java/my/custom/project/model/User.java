@@ -33,6 +33,7 @@ public class User {
 	@NotEmpty(message="Must not be null")
 	private String username;
 	
+
 	@Pattern(regexp="^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&./])[A-Za-z0-9$@$!%*#?&./]{5,20}$" , message="최소 5자 최대 20자 숫자, 문자, 특수문자 각각 1개 이상 포함")
 	@NotEmpty(message="Must not be null")
 	private String password;

@@ -31,10 +31,9 @@ public class UserDao {
 
 	public void addUser(User user) {
 		Session session = sessionFactory.getCurrentSession();
-		/*user.setPassword(passwordEncoder.encode(user.getPassword()));*/
+		//user.setPassword(passwordEncoder.encode(user.getPassword()));
 		session.saveOrUpdate(user);
 		session.flush();
-
 	}
 
 	public User getUserById(int userId) {

@@ -36,7 +36,7 @@ public class RegisterController {
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public String registerUserPost(@Valid User user , BindingResult result, Model model){
-		
+
 		if(result.hasErrors()){
 			return "registerUser";
 		}

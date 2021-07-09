@@ -16,13 +16,13 @@
 
 			<h3>기본정보</h3>
 			<div class="form-group">
-				<label for="username">ID</label> 
+				<label for="username">ID (사용자 아이디는 5자리 이상 12자 이하만 가능 합니다.)</label> 
 				<sf:input path="username" id="username" class="form-control" />
 				<sf:errors path="username" cssStyle="color : #ff0000" />
 			</div>
 
 			<div class="form-group">
-				<label for="password">Password</label>
+				<label for="password">Password (최소 5자 최대 20자 숫자, 문자, 특수문자 각각 1개 이상 포함)</label>
 				<sf:password path="password" id="password" class="form-control" />
 				<sf:errors path="password" cssStyle="color:#ff0000" />
 			</div>

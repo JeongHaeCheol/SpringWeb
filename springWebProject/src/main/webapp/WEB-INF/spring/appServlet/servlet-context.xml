@@ -35,8 +35,7 @@
 		<beans:property name="maxUploadSize" value="10240000"></beans:property>
 	</beans:bean>
 
-
-	<context:property-placeholder location="file:///C:\Users\irvin\Desktop\mailSender.properties" />
+	<context:property-placeholder location="file:///C:\Users\irvin\OneDrive\바탕 화면\mailSender.properties" />
 
 	<!-- gmail -->
 	<beans:bean id="mailSender"

@@ -25,5 +25,15 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/irvin/.m2/repository/org/springframework/spring-context/5.1.4.RELEASE/spring-context-5.1.4.RELEASE.jar" sourcepath="C:/Users/irvin/.m2/repository/org/springframework/spring-context/5.1.4.RELEASE/spring-context-5.1.4.RELEASE-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.archivename" value="spring-context-5.1.4.RELEASE.jar"/>
+			<attribute name="maven.groupId" value="org.springframework"/>
+			<attribute name="maven.artifactId" value="spring-context"/>
+			<attribute name="maven.version" value="5.1.4.RELEASE"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -3,6 +3,7 @@ package my.custom.project.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -89,6 +90,7 @@ public class ProjectsListController {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String name = user.getUsername();
 		project.setWriter(name);
+		project.setRegdate(new Date());
 
 		String saveFilenames = "";
 		String sumnailFileName = "";
@@ -170,6 +172,7 @@ public class ProjectsListController {
 		}
 		project.setSumnailFileName(sumnailFileName);
 		project.setImageFileNames(saveFilenames);
+		project.setRegdate(new Date());
 		
 		projectService.update(project);
 		

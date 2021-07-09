@@ -11,7 +11,7 @@ public class UploadFileUtils {
 
 	private static final Logger logger = LoggerFactory.getLogger(UploadFileUtils.class);
 
-	private String uploadPath = "C:\\Users\\irvin\\Desktop\\eclipse workspace\\springWebProject\\src\\main\\webapp\\resources\\";
+	private String uploadPath = "C:\\Users\\irvin\\eclipse-workspace\\SpringWeb\\springWebProject\\src\\main\\webapp\\resources\\";
 
 	public String getUploadPath(int sel) {
 		String path = "";
